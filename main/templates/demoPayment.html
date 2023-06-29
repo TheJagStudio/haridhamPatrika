@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="rzp-button1">Pay Lavajam</button>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+    var options = {
+        "key": "rzp_test_EdIMHRHA7suoML",
+        "amount": "{{repsonse.amount}}", 
+        "currency": "INR",
+        "name": "{{repsonse.notes.Name}}",
+        "description": "Test Transaction",
+        "image": "http://192.168.1.28:8080/static/SHA_logo.png",
+        "order_id": "{{repsonse.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        //"callback_url": "http://192.168.1.28:8080/profile/{{repsonse.notes.UniqueId}}/",
+        "prefill": {
+            "name": "{{repsonse.notes.Name}}",
+            "contact": "{{repsonse.notes.phone}}"
+        },
+        "notes": {
+            "UniqueId" :"{{repsonse.notes.UniqueId}}",
+            "Name" : "{{repsonse.notes.Name}}",
+            "City": "{{repsonse.notes.City}}",
+            "Taluka": "{{repsonse.notes.Taluka}}",
+            "District": "{{repsonse.notes.District}}",
+            "State" : "{{repsonse.notes.State}}",
+            "phone" : "{{repsonse.notes.phone}}"
+        },
+        "theme": {
+            "color": "#ff8243"
+        },
+        "handler": function (response){
+            alert(response.razorpay_payment_id);
+            alert(response.razorpay_order_id);
+            alert(response.razorpay_signature)}
+    };
+    var rzp1 = new Razorpay(options);
+    document.getElementById('rzp-button1').onclick = function(e){
+        rzp1.open();
+        e.preventDefault();
+        
+    }
+    rzp1.on('payment.failed', function (response){
+        alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+    })
+    </script>
+</body>
+</html>

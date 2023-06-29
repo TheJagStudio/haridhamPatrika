@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Meta tags  -->
+        <meta charset="utf-8"/>
+        <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+        <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" name="viewport"/>
+        <title>
+            Patrika - Sign In
+        </title>
+        <link href="images/favicon.png" rel="icon" type="image/png"/>
+        <!-- CSS Assets -->
+        <script defer="" src="/static/tailwind.js"></script>
+        <link href="/static/css/app.css" rel="stylesheet"/>
+        <!-- Javascript Assets -->
+        <script defer="" src="/static/js/app.js"></script>
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com" rel="preconnect"/>
+        <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet"/>
+        <script>
+			/**
+			    * THIS SCRIPT REQUIRED FOR PREVENT FLICKERING IN SOME BROWSERS
+			    */
+			   localStorage.getItem("dark-mode") === "dark" &&
+			     document.documentElement.classList.add("dark");
+		</script>
+    </head>
+    <body class="is-header-blur is-sidebar-open">
+        <!-- App preloader-->
+        <div class="app-preloader fixed z-50 grid h-full w-full place-content-center bg-slate-50 dark:bg-navy-900">
+            <div class="app-preloader-inner relative inline-block h-48 w-48">
+            </div>
+        </div>
+        <!-- Page Wrapper -->
+        <div class="min-h-100vh cloak flex grow bg-slate-50 dark:bg-navy-900" id="root">
+            <div class="fixed top-0 hidden p-6 lg:block lg:px-12">
+                <a class="flex items-center space-x-2" href="/">
+                    <img alt="logo" class="h-12 w-auto" src="/static/SHA_logo.png"/>
+                    <p class="text-xl font-semibold uppercase text-slate-700 dark:text-navy-100">
+                        Akshar Purushottam Satsang Patrika
+                    </p>
+                </a>
+            </div>
+            <div class="hidden w-full place-items-center lg:grid">
+                <div class="w-full max-w-lg p-6">
+                    <img alt="image" class="w-full" id="hero-image-light" src="/static/images/illustrations/dashboard-check.svg"/>
+                </div>
+            </div>
+            <main class="flex w-full flex-col items-center bg-white dark:bg-navy-700 lg:max-w-md">
+                <div class="flex w-full max-w-sm grow flex-col justify-center p-5">
+                    <div class="text-center">
+                        <img alt="logo" class="mx-auto h-16 w-16 lg:hidden" src="/static/SHA_logo.png"/>
+                        <div class="mt-4">
+                            <h2 class="text-2xl font-semibold text-slate-600 dark:text-navy-100">
+                                Welcome Back
+                            </h2>
+                            <p class="text-slate-400 dark:text-navy-300">
+                                Please sign in to continue
+                            </p>
+                        </div>
+                    </div>
+                    {% if error != "" %}
+                    <div class="border-2 border-red-600/50 bg-red-300/50 w-full h-8 rounded-lg xl:mt-0 lg:mt-3 md:mt-0">
+                        <h1 class="text-red-800 font-bold text-center">{{error}}</h1>
+                    </div>
+                    {%endif%}
+                    <form action="./" method="POST" id="loginForm">
+                        {% csrf_token %}
+                        <input type="text" id="g-recaptcha-response" name="g-recaptcha-response" hidden/>
+                        <input type="text" hidden id="next" name="next">
+                        <div class="mt-16">
+                            <label class="relative flex">
+                                <input required autocomplete="off" id="username" name="username" class="form-input peer w-full rounded-lg bg-slate-150 px-3 py-2 pl-9 ring-primary/50 placeholder:text-slate-400 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:placeholder:text-navy-300 dark:hover:bg-navy-900 dark:focus:bg-navy-900" placeholder="Username" type="text"/>
+                                <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                                    <svg class="h-5 w-5 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+                                        </path>
+                                    </svg>
+                                </span>
+                            </label>
+                            <label class="relative mt-4 flex">
+                                <input required autocomplete="off" id="password" name="password" class="form-input peer w-full rounded-lg bg-slate-150 px-3 pr-10 py-2 pl-9 ring-primary/50 placeholder:text-slate-400 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:placeholder:text-navy-300 dark:hover:bg-navy-900 dark:focus:bg-navy-900" placeholder="Password" type="password"/>
+                                <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                                    <svg class="h-5 w-5 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+                                        </path>
+                                    </svg>
+                                </span>
+                                <span onclick="passwordViewChanger()" class="absolute right-1 pt-2 flex h-full w-10 items-right justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                                    <svg id="eyeOpen" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="hidden" viewBox="0 0 16 16">
+                                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                                    </svg>
+                                    <svg id="eyeClose" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="" viewBox="0 0 16 16">
+                                        <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+                                        <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+                                        <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+                                    </svg>
+                                </span>
+                                <script>
+                                    function passwordViewChanger()
+                                    {
+                                        document.getElementById("eyeOpen").classList.toggle("hidden")
+                                        document.getElementById("eyeClose").classList.toggle("hidden")
+                                        const type = document.getElementById("password").getAttribute("type") === "password" ? "text" : "password" 
+                                        document.getElementById("password").setAttribute("type", type)
+                                    }
+                                </script>
+                            </label>
+                            <div class="mt-4 flex items-center justify-between space-x-2">
+                                <label class="inline-flex items-center space-x-2">
+                                    <input id="rememberMe" name="rememberMe" value="True" class="form-checkbox is-outline h-5 w-5 rounded border-slate-400/70 bg-slate-100 before:bg-primary checked:border-primary hover:border-primary focus:border-primary dark:border-navy-500 dark:bg-navy-900 dark:before:bg-accent dark:checked:border-accent dark:hover:border-accent dark:focus:border-accent" type="checkbox"/>
+                                    <span class="line-clamp-1">
+                                        Remember me
+                                    </span>
+                                </label>
+                                <a class="text-xs text-slate-400 transition-colors line-clamp-1 hover:text-slate-800 focus:text-slate-800 dark:text-navy-300 dark:hover:text-navy-100 dark:focus:text-navy-100" href="#">
+                                    Forgot Password?
+                                </a>
+                            </div>
+                            <button class="btn mt-10 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
+                                Sign In
+                            </button>
+                            <div class="mt-4 text-center text-xs+">
+                                <p class="line-clamp-1">
+                                    <span>
+                                        Dont have Account?
+                                    </span>
+                                    <a class="text-primary transition-colors hover:text-primary-focus dark:text-accent-light dark:hover:text-accent" href="pages-singup-2.html">
+                                        Create account
+                                    </a>
+                                </p>
+                            </div>
+                            <div class="my-7 flex items-center space-x-3">
+                                <div class="h-px flex-1 bg-slate-200 dark:bg-navy-500">
+                                </div>
+                                <p>
+                                    OR
+                                </p>
+                                <div class="h-px flex-1 bg-slate-200 dark:bg-navy-500">
+                                </div>
+                            </div>
+                            <div class="flex space-x-4">
+                                <button class="btn w-full space-x-3 border border-slate-300 font-medium text-slate-800 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-50 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
+                                    <img alt="logo" class="h-5.5 w-5.5" src="/static/images/logos/google.svg"/>
+                                    <span>
+                                        Google
+                                    </span>
+                                </button>
+                                <button class="btn w-full space-x-3 border border-slate-300 font-medium text-slate-800 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-50 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
+                                    <img alt="logo" class="h-5.5 w-5.5" src="/static/images/logos/github.svg"/>
+                                    <span>
+                                        Github
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="my-5 flex justify-center text-xs text-slate-400 dark:text-navy-300">
+                    <a href="#">
+                        Privacy Notice
+                    </a>
+                    <div class="mx-3 my-1 w-px bg-slate-200 dark:bg-navy-500">
+                    </div>
+                    <a href="#">
+                        Term of service
+                    </a>
+                </div>
+            </main>
+        </div>
+        <script src="https://www.google.com/recaptcha/api.js?render={{site_key}}"></script>
+        <script>
+            var url = new URL(window.location.href);
+            var next = url.searchParams.get("next");
+            document.getElementById("next").value = next;
+            grecaptcha.ready(function() {
+                grecaptcha.execute('{{site_key}}', {action: "/login"}).then(function(token) {
+                document.getElementById('g-recaptcha-response').value = token;
+                });
+            });
+        </script>
+    </body>
+</html>

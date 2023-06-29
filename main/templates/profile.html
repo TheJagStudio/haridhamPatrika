@@ -1,0 +1,346 @@
+<html>
+    <head>
+        <script src="/static/tailwind.js"></script>
+        <script type="text/javascript" src="/static/jquery.js"></script>
+        <link rel="icon" type="image/x-icon" href="/static/SHA_logo.png">
+        <link rel="preload" href="/static/SHREE-GUJ7-0750.woff2" as="font" type="font/woff2">
+        <link rel="preload" href="/static/Shree-Guj-0768.woff2" as="font" type="font/woff2">
+        <title>Profile</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://unpkg.com/pdf-lib"></script>
+        <style>
+            body::-webkit-scrollbar {
+                display: none;
+            }
+        </style>
+    </head>
+    <body class="relative bg-[#1f2937] sm:bg-[#1f2937] md:bg-[#192132] overflow-x-hidden">
+        <div class="w-full z-10 max-w-2xl sm:rounded-none md:rounded-xl shadow-none md:shadow-md bg-gray-800 border-gray-700 m-auto mt-10 transition-all duration-300" >
+            <div class="flex justify-end px-4 pt-4">
+                <button onclick="javascript:document.getElementById('dropdown').classList.toggle('hidden')" id="dropdownButton" data-dropdown-toggle="dropdown"  class="inline-block  text-gray-400 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
+                    <span class="sr-only">Open dropdown</span>
+                    <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                    </svg>
+                </button>
+                <!-- Dropdown menu -->
+                <div id="dropdown" class="z-10 absolute hidden text-base list-none divide-y divide-gray-100 rounded shadow w-44 bg-gray-700  translate-y-12">
+                    <ul class="py-1" aria-labelledby="dropdownButton">
+                        <li>
+                            <button onclick="edit()" class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Edit</button>
+                        </li>
+                        <li>
+                            <button onclick="exportPdf()" class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Export Data</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="flex flex-col items-center pb-10">
+                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="/static/avatar.png"/>
+                <input id="name" name="name" disabled type="text" value="{{name}}" class="mb-1 w-96 text-xl text-center font-medium text-white bg-transparent px-2 rounded-lg"></input>
+                <div class="text-sm text-white ">{{city}}, {{state}} {% if phoneNum != "" %} | <input id="phoneNum" minlength="10" maxlength="10" type="number" disabled class="bg-transparent w-fit px-2 py-1 rounded-lg w-28 " value="{{phoneNum}}"/>{%else%}| <input id="phoneNum" minlength="10" maxlength="10" type="number" disabled placeholder="Enter Phone" class="hidden bg-transparent w-fit px-2 py-1 rounded-lg w-28 " value="{{phoneNum}}"/>{% endif %}</div>
+                <div id="details" class="origin-top transition-height duration-300 overflow-hidden mb-3">
+                    <div class="grid grid-cols-2 h-fit overflow-hidden text-left mt-3 w-full border-t-2 border-[[#FFD07F]/25] pl-10 pr-3 pt-2">
+                        {%if districtCode != None%}
+                        <h5 class="mb-1 text-sm font-medium text-gray-400 ">District Code</h5>
+                        <h5 class="mb-1 text-sm font-medium text-white px-2 py-1 transition-all duration-300 rounded-lg bg-transparent">{{districtCode}}</h5>
+                        {% endif %}
+                        <h5 class="mb-1 text-sm font-medium text-gray-400 ">Subscription Start Date  </h5>
+                        <h5 class="mb-1 text-sm font-medium text-white px-2 py-1 transition-all duration-300 rounded-lg bg-transparent">{{entryDate}}</h5>
+                        <h5 class="mb-1 text-sm font-medium text-gray-400 ">Subscription End Date</h5>
+                        <h5 class="mb-1 text-sm font-medium text-white px-2 py-1 transition-all duration-300 rounded-lg bg-transparent">{{endDate}}</h5>
+                        <h5 class="mb-1 text-sm font-medium text-gray-400 ">Subscription Time Period</h5>
+                        <h5 class="mb-1 text-sm font-medium text-white px-2 py-1 transition-all duration-300 rounded-lg bg-transparent">{{subYear}}</h5>
+                        {% if addressOne != "" %}
+                        <h5 id="addressOneLabel" class="mb-1 text-sm font-medium text-gray-400 ">Address 1 </h5>
+                        <input id="addressOne" name="addressOne" disabled type="text" value="{{addressOne}}" class="mb-1 text-sm font-medium text-white px-2 py-1 transition-all duration-300 rounded-lg bg-transparent"></input>
+                        {%else%}
+                        <h5 id="addressOneLabel" class="mb-1 text-sm font-medium text-gray-400 hidden">Address 1 </h5>
+                        <input id="addressOne" name="addressOne" disabled placeholder="Enter Address One" type="text" value="{{addressOne}}" class="hidden mb-1 text-sm font-medium text-white px-2 py-1 transition-all duration-300 rounded-lg bg-transparent"></input>
+                        {% endif %}{% if addressTwo != "" %}
+                        <h5 id="addressTwoLabel" class="mb-1 text-sm font-medium text-gray-400 ">Address 2 </h5>
+                        <input id="addressTwo" name="addressTwo" disabled type="text" value="{{addressTwo}}" class="mb-1 text-sm font-medium text-white px-2 py-1 transition-all duration-300 rounded-lg bg-transparent"></input>
+                        {%else%}
+                        <h5 id="addressTwoLabel" class="mb-1 text-sm font-medium text-gray-400 hidden">Address 2 </h5>
+                        <input id="addressTwo" name="addressTwo" disabled placeholder="Enter Address Two" type="text" value="{{addressTwo}}" class="hidden mb-1 text-sm font-medium text-white px-2 py-1 transition-all duration-300 rounded-lg bg-transparent"></input>
+                        {% endif %}{% if addressThree != "" %}
+                        <h5 id="addressThreeLabel" class="mb-1 text-sm font-medium text-gray-400 ">Address 3 </h5>
+                        <input id="addressThree" name="addressThree" disabled type="text" value="{{addressThree}}" class="mb-1 text-sm font-medium text-white px-2 py-1 transition-all duration-300 rounded-lg bg-transparent"></input>
+                        {%else%}
+                        <h5 id="addressThreeLabel" class="mb-1 text-sm font-medium text-gray-400 hidden">Address 3 </h5>
+                        <input id="addressThree" name="addressThree" disabled placeholder="Enter Address Three" type="text" value="{{addressThree}}" class="hidden mb-1 text-sm font-medium text-white px-2 py-1 transition-all duration-300 rounded-lg bg-transparent"></input>
+                        {% endif %}
+                        <h5 class="mb-1 text-sm font-medium text-gray-400 ">State</h5>
+                        <input onchange="districtSelector()" placeholder="Enter State" value="{{state}}" list="states" id="state" name="state" disabled type="text" value="{{district}}" class="mb-1 text-sm font-medium text-white px-2 py-1 transition-all duration-300 rounded-lg bg-transparent"></input>
+                        <datalist id="states" name="states" disabled>
+                            {%for state in stateArr%}
+                                <option>{{state}}</option>
+                            {%endfor%}
+                        </datalist>
+                        <h5 class="mb-1 text-sm font-medium text-gray-400 ">District</h5>
+                        <input onchange="talukaSelector()" id="district" name="district" value="{{district}}" list="districts" disabled type="text" value="{{district}}" class="mb-1 text-sm font-medium text-white px-2 py-1 transition-all duration-300 rounded-lg bg-transparent"></input>
+                        <datalist id="districts" name="districts" disabled>
+                        </datalist>
+                        <h5 class="mb-1 text-sm font-medium text-gray-400 ">Taluka</h5>
+                        <input onchange="citySelector()" id="taluka" name="taluka" list="talukas" disabled type="text" value="{{taluka}}" class="mb-1 text-sm font-medium text-white px-2 py-1 transition-all duration-300 rounded-lg bg-transparent"></input>
+                        <datalist id="talukas" name="talukas" class="form-select mt-1.5 w-full rounded-lg bg-slate-150 px-3 py-2 ring-primary/50 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:hover:bg-navy-900 dark:focus:bg-navy-900">
+                        </datalist>
+                        <h5 class="mb-1 text-sm font-medium text-gray-400 ">City</h5>
+                        <input id="city" name="city" list="citys" disabled type="text" value="{{city}}" class="mb-1 text-sm font-medium text-white px-2 py-1 transition-all duration-300 rounded-lg bg-transparent"></input>
+                        <datalist id="citys" name="citys" class="form-select mt-1.5 w-full rounded-lg bg-slate-150 px-3 py-2 ring-primary/50 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:hover:bg-navy-900 dark:focus:bg-navy-900">
+                        </datalist>
+                    </div>
+                    <div id="submit" class="w-full relative h-fit scale-y-0 transition-all duration-300">
+                        <button class="absolute inset-y-0 right-10 mr-5 bg-blue-600 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded-lg right-0">Submit</button>
+                    </div>
+                    <div class="flex px-2 mt-4 space-x-3 md:mt-6 mb-3">
+                        <button id="rzp-button1" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Pay for 1 Year Subscription</button>
+                        <button id="rzp-button2" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Pay for 2 Year Subscription</button>
+                        <button id="rzp-button3" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Pay for 3 Year Subscription</button>
+                    </div>
+                </div>
+                <button onclick="contact()" id="contactUs" class="inline-flex items-center px-4 py-2 h-fit text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Contact Us</button>
+            </div>
+        </div>
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+        <script src="https://www.google.com/recaptcha/api.js?render={{site_key}}"></script>
+    <script>
+        var CSRF_TOKEN = '{{ csrf_token }}'
+        function districtSelector()
+        {
+            let district = $("#state").val();
+            let gRecaptchaToken = "";
+            grecaptcha.execute('{{site_key}}', {action: "/"}).then(function(token) {
+                gRecaptchaToken = token;
+                const formData = new FormData();
+                formData.append("csrfmiddlewaretoken" , CSRF_TOKEN);
+                formData.append("g-recaptcha-response" , gRecaptchaToken);
+                formData.append('state', district);
+                fetch("/api/districtFinder/", {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(res =>res.json())
+                .then(d => {
+                    districtArr = d["data"];
+                    $('#districts').empty().append('<option disabled selected></option>')
+                    for(i=0;i<districtArr.length;i++)
+                    {
+                        $('#districts').append(`<option >${districtArr[i]}</option>`);
+                    }
+                    
+                })
+            });
+        }
+        function talukaSelector()
+        {
+            let district = $("#district").val();
+            let gRecaptchaToken = "";
+            grecaptcha.execute('{{site_key}}', {action: "/"}).then(function(token) {
+                gRecaptchaToken = token;
+                const formData = new FormData();
+                formData.append("csrfmiddlewaretoken" , CSRF_TOKEN);
+                formData.append('district', district);
+                formData.append("g-recaptcha-response" , gRecaptchaToken);
+                fetch("/api/talukaFinder/", {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(res =>res.json())
+                .then(d => {
+                    talukaArr = d["data"];
+                    $('#talukas').empty().append('<option disabled selected></option>')
+                    for(i=0;i<talukaArr.length;i++)
+                    {
+                        $('#talukas').append(`<option >${talukaArr[i]}</option>`);
+                    }
+                    
+                })
+            })
+        }
+        function citySelector()
+        {
+            let district = $("#district").val();
+            let taluka = $("#taluka").val();
+            let gRecaptchaToken = "";
+            grecaptcha.execute('{{site_key}}', {action: "/"}).then(function(token) {
+                gRecaptchaToken = token;    
+                const formData = new FormData();
+                formData.append("csrfmiddlewaretoken" , CSRF_TOKEN);
+                formData.append('district', district);
+                formData.append('taluka', taluka);
+                formData.append("g-recaptcha-response" , gRecaptchaToken);
+                fetch("/api/cityFinder/", {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(res =>res.json())
+                .then(d => {
+                    cityArr = d["data"];
+                    $('#citys').empty().append('<option disabled selected></option>')
+                    for(i=0;i<cityArr.length;i++)
+                    {
+                        $('#citys').append(`<option >${cityArr[i]}</option>`);
+                    }
+                    
+                })
+            })
+        }
+        function exportPdf()
+        {
+            document.querySelector("#contactUs").classList.toggle("hidden")
+            document.querySelector("#dropdownButton").classList.toggle("hidden")
+            document.querySelector("#submit").classList.toggle("hidden")
+            document.querySelector("#rzp-button1").classList.toggle("hidden")
+            document.querySelector("#rzp-button2").classList.toggle("hidden")
+            document.querySelector("#rzp-button3").classList.toggle("hidden")
+            document.querySelector("#dropdown").classList.toggle("hidden")
+
+            window.print()
+
+            document.querySelector("#dropdown").classList.toggle("hidden")
+            document.querySelector("#contactUs").classList.toggle("hidden")
+            document.querySelector("#dropdownButton").classList.toggle("hidden")
+            document.querySelector("#submit").classList.toggle("hidden")
+            document.querySelector("#rzp-button1").classList.toggle("hidden")
+            document.querySelector("#rzp-button2").classList.toggle("hidden")
+            document.querySelector("#rzp-button3").classList.toggle("hidden")
+        }
+        function edit()
+        {
+            inputs = document.getElementsByTagName("input")
+            document.getElementById("submit").classList.toggle("scale-y-0")
+            document.getElementById("submit").classList.toggle("h-fit")
+            document.getElementById("submit").classList.toggle("h-10")
+            for(let i in inputs)
+            {
+                try{
+                    inputs[i].classList.toggle("bg-gray-600")
+                    if(inputs[i].disabled == false)
+                    {
+                        inputs[i].disabled = true;
+                    }
+                    else
+                    {
+                        inputs[i].disabled = false;
+                    }
+                }
+                catch
+                {
+                    continue
+                }
+            }
+            if(document.getElementById("addressOne").classList.contains("hidden"))
+            {
+                document.getElementById("addressOne").classList.remove("hidden")
+                document.getElementById("addressOneLabel").classList.remove("hidden")
+            }
+            if(document.getElementById("addressTwo").classList.contains("hidden"))
+            {
+                document.getElementById("addressTwo").classList.remove("hidden")
+                document.getElementById("addressTwoLabel").classList.remove("hidden")
+            }
+            if(document.getElementById("addressThree").classList.contains("hidden"))
+            {
+                document.getElementById("addressThree").classList.remove("hidden")
+                document.getElementById("addressThreeLabel").classList.remove("hidden")
+            }
+            if(document.getElementById("phoneNum").classList.contains("hidden"))
+            {
+                document.getElementById("phoneNum").classList.remove("hidden")
+                document.getElementById("phoneNum").classList.remove("hidden")
+            }
+        }
+        function contact()
+        {
+            document.getElementById("details").classList.toggle("h-0")
+        }
+        function createOrder(subYear,e)
+        {
+            window.optionsOrder = {
+                "key": "rzp_test_EdIMHRHA7suoML",
+                "amount": "20000", 
+                "currency": "INR",
+                "name": "{{name}}",
+                "description": "Test Transaction",
+                "order_id": "",
+                //"callback_url": "http://192.168.1.28:8080/profile/{{repsonse.notes.UniqueId}}/",
+                "prefill": {
+                    "name": "{{name}}",
+                    "contact": "{{phoneNum}}",
+                    "email": "thejagstudio@gmail.com",
+                },
+                "notes": {
+                    "uniqueId" :"{{dataid}}",
+                    "name" : "{{name}}",
+                    "city": "{{city}}",
+                    "taluka": "{{taluka}}",
+                    "district": "{{district}}",
+                    "state" : "{{state}}",
+                    "phone" : "{{phoneNum}}"
+                },
+                "theme": {
+                    "color": "#ff8243"
+                },
+                "handler": function (response){
+                    console.log(response);
+                    console.log(response.razorpay_payment_id);
+                    console.log(response.razorpay_order_id);
+                    console.log(response.razorpay_signature)
+                }
+            };
+            let gRecaptchaToken = "";
+            grecaptcha.execute('{{site_key}}', {action: "/"}).then(function(token) {
+                gRecaptchaToken = token;
+                var CSRF_TOKEN = '{{ csrf_token }}'
+                const formData = new FormData();
+                formData.append("csrfmiddlewaretoken" , CSRF_TOKEN);
+                formData.append("g-recaptcha-response" , gRecaptchaToken);
+                formData.append('subYear', subYear);
+                formData.append('uniqueId', "{{dataid}}");
+                formData.append('name', "{{name}}");
+                formData.append("city" , "{{city}}");
+                formData.append("taluka" , "{{taluka}}");
+                formData.append("district" , "{{district}}");
+                formData.append("state" , "{{state}}");
+                formData.append("phone" , "{{phoneNum}}");
+                fetch("/api/payOneYear/", {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(res =>res.json())
+                .then(d => {
+                    console.log(d)
+                    optionsOrder["amount"] = d["amount"].toString();
+                    optionsOrder["order_id"] = d["id"].toString();
+                    console.log(optionsOrder)
+                    rzp = new Razorpay(optionsOrder);
+                    rzp.on('payment.failed', function (response){
+                        console.log(response.error.code);
+                        console.log(response.error.description);
+                        console.log(response.error.source);
+                        console.log(response.error.step);
+                        console.log(response.error.reason);
+                        console.log(response.error.metadata.order_id);
+                        console.log(response.error.metadata.payment_id);
+                    })
+                    rzp.open();
+                    e.preventDefault();
+                })
+            })
+            
+        }
+
+        document.getElementById('rzp-button1').onclick = function(e){
+            createOrder(1,e);
+        }
+        
+        document.getElementById('rzp-button2').onclick = function(e){
+            createOrder(2,e);
+        }
+        document.getElementById('rzp-button3').onclick = function(e){
+            createOrder(3,e);        
+        }
+    </script>
+    </body>
+</html>
