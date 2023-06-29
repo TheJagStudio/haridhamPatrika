@@ -1,0 +1,204 @@
+
+<html lang="en">
+
+<head>
+    <script src="/static/tailwind.js"></script>
+    <script type="text/javascript" src="/static/jquery.js"></script>
+    <link rel="icon" type="image/x-icon" href="/static/SHA_logo.png">
+    <link rel="preload" href="/static/SHREE-GUJ7-0750.woff2" as="font" type="font/woff2">
+    <link rel="preload" href="/static/Shree-Guj-0768.woff2" as="font" type="font/woff2">
+    <title>Patrika Address Add Surat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body class="bg-white md:bg-[#FFD07F]/25">
+    <div class="w-full md:w-[90%] lg:w-[90%] h-fit pb-5 mb-10 bg-white rounded-none md:rounded-2xl mx-0  md:mx-[5%] lg:mx-[5%] mt-0 md:mt-10 border-0 md:border-[1px] overflow-hidden">
+        <div class="w-full h-fit bg-[#FF8243] pt-10 md:pt-2 pb-2 flex flex-nowrap justify-between items-center mx-auto">
+            <h1 class="font-bold hidden md:block text-xl sm:text-2xl md:text-2xl lg:text-lg xl:text-2xl  text-white ml-5 max-w-[600px]">
+                Akshar&nbsp;Purushottam&nbsp;Satsang&nbsp;Patrika&nbsp;Address
+            </h1>
+            <h1 class="font-bold block md:hidden text-xl sm:text-2xl md:text-2xl lg:text-lg xl:text-2xl text-white ml-5 max-w-[600px]">
+                APSP
+            </h1>
+            <div class="flex flex-nowrap justify-between items-center">
+                <h1 class="font-bold text-md text-white mr-3">
+                    {{user.get_full_name}}
+                </h1>
+                <button type="" onclick="javascript:location.href='/logout'" class="w-20 h-6 bg-white rounded-full text-[#E26A2C] font-bold mr-5" style="box-shadow: inset 0px 0px 7px #C9C9C9;">
+                    Logout
+                </button>
+            </div>
+        </div>
+        <div class="w-full h-12 bg-[#E26A2C] ">
+            <div class="flex flex-nowrap">
+                <div class="relative" onmouseenter="document.getElementById('SuratMenu').classList.remove('hidden')" onmouseleave="document.getElementById('SuratMenu').classList.add('hidden')">
+                    <button type="button" class="text-[#E26A2C] bg-white font-bold rounded-tl-lg text-md md:text-lg px-1 md:px-5 mt-3 text-center ml-2 md:ml-5 border-r-2 border-gray-500" style="box-shadow: inset 0px 0px 7px #C9C9C9;">Surat</button>
+                    <div id="SuratMenu" class="absolute hidden h-fit w-fit bg-white rounded-b-lg overflow-hidden translate-x-2 md:translate-x-5 " style="box-shadow: inset 0px 0px 7px #C9C9C9;">
+                        <h1 onclick="javascript:location.href='./suratAdd.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
+                            Surat&nbsp;Add
+                        </h1>
+                        <hr>
+                        <h1 onclick="javascript:location.href='./suratEdit.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
+                            Surat&nbsp;Edit
+                        </h1>
+                        <hr>
+                        <h1 onclick="javascript:location.href='./suratList.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
+                            Surat&nbsp;List
+                        </h1>
+                    </div>
+                </div>
+                <div class="relative" onmouseenter="document.getElementById('DistrictMenu').classList.remove('hidden')" onmouseleave="document.getElementById('DistrictMenu').classList.add('hidden')">
+                    <button type="button" class="text-[#E26A2C] bg-white font-bold text-md md:text-lg px-1 md:px-5 mt-3 text-center ml-0 border-r-2 border-gray-500 -translate-x-1" style="box-shadow: inset 0px 0px 7px #C9C9C9;">Address</button>
+                    <div id="DistrictMenu" class="absolute hidden h-fit w-fit bg-white rounded-b-lg overflow-hidden -translate-x-1" style="box-shadow: inset 0px 0px 7px #C9C9C9;">
+                        <h1 onclick="javascript:location.href='./districtAdd.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
+                            District&nbsp;Add
+                        </h1>
+                        <hr>
+                        <h1 onclick="javascript:location.href='./districtEdit.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
+                            District&nbsp;Edit
+                        </h1>
+                        <hr>
+                        <h1 onclick="javascript:location.href='./districtList.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
+                            District&nbsp;List
+                        </h1>
+                    </div>
+                </div>
+                <div class="relative" onmouseenter="document.getElementById('CityMenu').classList.remove('hidden')" onmouseleave="document.getElementById('CityMenu').classList.add('hidden')">
+                    <button type="button" class="text-[#E26A2C] bg-white font-bold text-md md:text-lg px-1 md:px-5 mt-3 text-center ml-0 border-r-2 border-gray-500 -translate-x-2" style="box-shadow: inset 0px 0px 7px #C9C9C9;">City</button>
+                    <div id="CityMenu" class="absolute hidden h-fit w-fit bg-white rounded-b-lg overflow-hidden -translate-x-2" style="box-shadow: inset 0px 0px 7px #C9C9C9;">
+                        <h1 onclick="javascript:location.href='/location'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
+                            City&nbsp;Add
+                        </h1>
+                        <hr>
+                        <h1 onclick="javascript:location.href='./cityEdit.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
+                            City&nbsp;Edit
+                        </h1>
+                        <hr>
+                        <h1 onclick="javascript:location.href='./CityDistrictAdd.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
+                            District&nbsp;Add
+                        </h1>
+                        <hr>
+                        <h1 onclick="javascript:location.href='./CityDistrictEdit.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
+                            District&nbsp;Edit
+                        </h1>
+                        <hr>
+                        <h1 onclick="javascript:location.href='./CityTalukaAdd.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
+                            Taluka&nbsp;Add
+                        </h1>
+                    </div>
+                </div>
+                <div class="relative" onmouseenter="document.getElementById('KaryakartaMenu').classList.remove('hidden')" onmouseleave="document.getElementById('KaryakartaMenu').classList.add('hidden')">
+                    <button type="button" class="text-[#E26A2C] bg-white font-bold text-md md:text-lg px-1 md:px-5 mt-3 text-center ml-0 border-r-2 border-gray-500 -translate-x-3" style="box-shadow: inset 0px 0px 7px #C9C9C9;">Karyakarta</button>
+                    <div id="KaryakartaMenu" class="absolute hidden h-fit w-fit bg-white rounded-b-lg overflow-hidden -translate-x-3" style="box-shadow: inset 0px 0px 7px #C9C9C9;">
+                        <h1 onclick="javascript:location.href='./karyakartaAdd.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
+                            Karyakarta&nbsp;Add
+                        </h1>
+                        <hr>
+                        <h1 onclick="javascript:location.href='./karyakartaEdit.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
+                            Karyakarta&nbsp;Edit
+                        </h1>
+                        <hr>
+                        <h1 onclick="javascript:location.href='./karyakartaList.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
+                            Karyakarta&nbsp;List
+                        </h1>
+                    </div>
+                </div>
+                <div class="relative" onmouseenter="document.getElementById('AdminMenu').classList.remove('hidden')" onmouseleave="document.getElementById('AdminMenu').classList.add('hidden')">
+                    <button type="button" class="text-[#E26A2C] bg-white font-bold rounded-tr-lg text-md md:text-lg px-1 md:px-5 mt-3 text-center ml-0 -translate-x-4" style="box-shadow: inset 0px 0px 7px #C9C9C9;">Admin</button>
+                    <div id="AdminMenu" class="absolute hidden h-22 w-fit bg-white rounded-b-lg overflow-hidden -translate-x-4" style="box-shadow: inset 0px 0px 7px #C9C9C9;">
+                        <h1 onclick="javascript:location.href='./duplicateEntry.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
+                            Duplicate&nbsp;Entry
+                        </h1>
+                        <hr>
+                        <h1 onclick="javascript:location.href='./pradeshList.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
+                            Pradesh&nbsp;List
+                        </h1>
+                        <hr>
+                        <h1 class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
+                            Admin&nbsp;Grid
+                        </h1>
+                        <hr>
+                        <h1 class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
+                            All&nbsp;List
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            <div>
+            </div>
+        </div>
+        <h1 class="ml-5 mt-2 text-gray-600 font-bold">City Add Form</h1>
+        <button onclick="javascript:$('#formContainer').toggleClass('hidden')" class="text-base text-white font-bold ml-5 mt-2 rounded-full px-5 bg-[#E26A2C] hover:bg-[#E26A2C]/90 ">Add</button>
+        <h1 class="hidden ml-5 my-1 px-3 w-fit rounded-lg text-red-500 hover:text-green-500 bg-red-300/25 hover:bg-green-300/25 border-2 border-red-500 hover:border-green-500 font-bold ">
+            This is a sample msg/error
+        </h1>
+        <form action="./" method="post">
+            {% csrf_token %}
+            <div id="formContainer" class="mx-5 mt-2 text-gray-600 hidden">
+                <div class="flex flex-nowrap">
+                    <label for="cityName" class="mr-3 w-32">City&nbsp;Name</label>
+                    <input type="text" name="cityName" id="cityName" required class="border-2 rounded-lg px-2 mb-1 w-48">
+                </div>
+                <div class="flex flex-nowrap">
+                    <label for="District" class="mr-3 w-32">District</label>
+                    <input onchange="talukaSelector()" type="text" list="Districts" required name="District" id="District" class="border-2 rounded-lg px-2 mb-1 w-48">
+                    <datalist id="Districts" name="Districts" class="border-2 rounded-lg px-2 mb-1 w-48">
+                        <option value="" disabled selected>
+                        {% for district in districtArr %}
+                        <option value="{{district}}">
+                        {%endfor%}
+                    </datalist>
+                </div>
+                <div class="flex flex-nowrap ">
+                    <label for="Taluka" class="mr-3 w-32">Taluka</label>
+                    <select id="Taluka" name="Taluka" class="border-2 rounded-lg px-2 mb-1 w-48" required>
+                        <option value="" disabled selected>--Select--</option>
+                    </select>
+                </div>
+                <div class="flex flex-nowrap ">
+                    <label for="Pincode" class="mr-3 w-32">Pincode</label>
+                    <input type="number" name="Pincode" id="Pincode" min="111111" max="999999" required class="border-2 rounded-lg px-2 mb-1 w-48">
+                </div>
+                <div class="flex flex-nowrap ">
+                    <label for="Pradesh" class="mr-3 w-32">Pradesh</label>
+                    <select id="Pradesh" name="Pradesh" class="border-2 rounded-lg px-2 mb-1 w-48" required>
+                        <option value="" disabled selected>--Select--</option>
+                        {% for pradesh in pradeshArr %}
+                        <option value="{{pradesh}}">{{pradesh}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+                <div class="flex flex-nowrap gap-5">
+                    <button type="submit" class="text-base text-white font-bold mt-2 rounded-full px-5 bg-[#E26A2C] hover:bg-[#E26A2C]/90 ">Save</button>
+                    <button type="button" class="text-base text-white font-bold mt-2 rounded-full px-5 bg-[#E26A2C] hover:bg-[#E26A2C]/90 ">Clear</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        var CSRF_TOKEN = '{{ csrf_token }}'
+        function talukaSelector()
+        {
+            let district = $("#District").val();
+            const formData = new FormData();
+            formData.append("csrfmiddlewaretoken" , CSRF_TOKEN);
+            formData.append('district', district);
+            fetch("/api/talukaFinder/", {
+                method: 'POST',
+                body: formData
+            })
+            .then(res =>res.json())
+            .then(d => {
+                talukaArr = d["data"];
+                $('#Taluka').empty().append('<option value="" disabled selected>--Select--</option>')
+                for(i=0;i<talukaArr.length;i++)
+                {
+                    $('#Taluka').append(`<option value="${talukaArr[i]}">${talukaArr[i]}</option>`);
+                }
+                
+            })
+        }
+    </script>
+</body>
+
+</html>

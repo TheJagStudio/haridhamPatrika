@@ -1,0 +1,51 @@
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Label Pdf</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body style='font-family:-apple-system,BlinkMacSystemFont," Segoe UI Adjusted"," Segoe UI"," Liberation Sans",sans-serif'>
+        {%for page in dataArr%}
+        <div class="h-[296mm] pt-[13mm] pb-[12mm] px-[5mm]">
+            {%for row in page%}
+            <div class="flex flex-nowrap gap-[3mm]">
+                {%for entry in row%}
+                {% if entry != "###"%}
+                <div class="rounded-lg w-[64mm] h-[34mm] p-4 pt-2 overflow-hidden">
+                    <div class="flex flex-nowrap gap-5 items-center justify-between w-full">
+                        <h1 class="text-xs font-bold">{{entry.0}} : {{entry.1}}</h1>
+                        {% if expire == "False" %}
+                        <h1 class="text-[9.6px] px-1 font-bold border-2 border-black bg-gray-600 text-white rounded-lg">EXP : {{entry.2}}</h1>
+                        {% else %}
+                        <h1 class="text-[9.6px] px-1 font-extrabold text-black">EXP : {{entry.2}}</h1>
+                        {%endif%}
+                    </div>
+                    <h1 class="text-[9.6px] font-bold">{{entry.3}}</h1>
+                    <h1 class="text-[9.6px]">{{entry.4}}</h1>
+                    <div class="flex flex-nowrap">
+                        <div class="w-3/4">
+                            {% if entry.5 != "" %}
+                            <h1 class="text-[9.6px]">{{entry.5}}{% if entry.6 != "" %} , {{entry.6}}{%endif%}</h1>
+                            {%endif%}
+                            <h1 class="text-[9.6px] font-bold">{{entry.7}} : {{entry.8}}</h1>
+                            <h1 class="text-[9.6px]">Ta : {{entry.9}}</h1>
+                            <h1 class="text-[9.6px] font-bold">Di : {{entry.10}}</h1>
+                        </div>
+                        <div class="w-1/4 pt-2">
+                            <img src="data:image/png;base64,{{entry.11}}">
+                        </div>
+                    </div>
+                </div>
+                {%else%}
+                <div class="rounded-lg w-[64mm] h-[34mm] p-4 pt-2 overflow-hidden"></div>
+                {%endif%}
+                {%endfor%}
+            </div>
+            {%endfor%}
+        </div>
+        {%endfor%}
+    </body>
+</html>

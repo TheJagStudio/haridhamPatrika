@@ -1,0 +1,220 @@
+{% extends "base.html" %}
+{% block title %}Patrika - User Add{% endblock %}
+{% block content %}
+<!-- Main Content Wrapper -->
+<main class="main-content w-full px-[var(--margin-x)] pb-8">
+	<div class="flex items-center space-x-4 py-5 lg:py-6">
+		<h2 class="text-xl font-medium text-slate-800 dark:text-navy-50 lg:text-2xl">
+			All List
+		</h2>
+		<div class="hidden h-full py-1 sm:flex">
+			<div class="h-full w-px bg-slate-300 dark:bg-navy-600"></div>
+		</div>
+		<ul class="hidden flex-wrap items-center space-x-2 sm:flex">
+			<li class="flex items-center space-x-2">
+				<a class="text-primary transition-colors hover:text-primary-focus dark:text-accent-light dark:hover:text-accent" href="#">Admin Panel</a>
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+				</svg>
+			</li>
+			<li>All List</li>
+		</ul>
+	</div>
+	{% if error != "" %}
+	<div id="alert-dismissable-1" data-dismiss-class="scale-0 transition-all duration-300" class="w-[80%] sm:w-[50%] mx-auto mb-2 alert flex items-center justify-between overflow-hidden rounded-lg border border-error text-error">
+		<div class="flex">
+			<div class="bg-error p-3 text-white">
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+				</svg>
+			</div>
+			<div class="px-4 py-3 sm:px-5 w-fit">{{error}}</div>
+		</div>
+		<div class="px-2">
+			<button data-remove-alert class="btn h-7 w-7 rounded-full p-0 font-medium text-error hover:bg-error/20 focus:bg-error/20 active:bg-error/25" >
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+				</svg>
+			</button>
+		</div>
+	</div>
+	<script>
+		// Dismissable alert 1
+		const alert1 = document.querySelector("#alert-dismissable-1");
+		
+		alert1
+			.querySelector("[data-remove-alert]")
+			.addEventListener("click", () => {
+			alert1.classList.add(...alert1.dataset.dismissClass.trim().split(" "));
+			setTimeout(() => alert1.remove(), 300);
+			});
+	</script>  
+	{% elif msg != "" %}
+	<div id="alert-dismissable-2" data-dismiss-class="scale-0 transition-all duration-300" class="w-[80%] sm:w-[50%] mx-auto mb-2 alert flex items-center justify-between overflow-hidden rounded-lg border border-success text-success">
+		<div class="flex">
+			<div class="bg-success p-3 text-white">
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+				</svg>
+			</div>
+			<div class="px-4 py-3 sm:px-5 w-fit">{{msg}}</div>
+		</div>
+		<div class="px-2">
+			<button data-remove-alert class="btn h-7 w-7 rounded-full p-0 font-medium text-success hover:bg-success/20 focus:bg-success/20 active:bg-success/25" >
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+				</svg>
+			</button>
+		</div>
+	</div>
+	<script>
+		// Dismissable alert 1
+		const alert2 = document.querySelector("#alert-dismissable-2");
+		
+		alert2
+			.querySelector("[data-remove-alert]")
+			.addEventListener("click", () => {
+			alert2.classList.add(...alert2.dataset.dismissClass.trim().split(" "));
+			setTimeout(() => alert2.remove(), 300);
+			});
+	</script> 
+	{%endif%} 
+	<div class="grid grid-cols-12 gap-4 sm:gap-5 lg:gap-6">
+		<div class="col-span-0"></div>
+		<div class="col-span-12">
+			<div class="card p-4 sm:p-5">
+				<div class="mt-2 space-y-1">
+					<h1 class="text-2xl font-extrabold text-success mb-2">In Gujarat</h1>
+					<button onclick="listCreator('ADD')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >1. ADD</button>
+					<button onclick="listCreator('AL')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >2. AL</button>
+					<button onclick="listCreator('AND')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >3. AND</button> 
+					<button onclick="listCreator('BC')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >4. BC</button>
+					<button onclick="listCreator('BHK')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >5. BHK</button>
+					<button onclick="listCreator('BHR')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >6. BHR</button>
+					<button onclick="listCreator('DG')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >7. DG</button>
+					<button onclick="listCreator('GRD')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >8. GRD</button>
+					<button onclick="listCreator('JD')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >9. JD</button>  
+					<button onclick="listCreator('JR')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >10. JR</button>
+					<button onclick="listCreator('KD')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >11. KD</button>
+					<button onclick="listCreator('MN')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >12. MN</button> 
+					<button onclick="listCreator('NRM')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >13. NRM</button>
+					<button onclick="listCreator('NV')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >14. NV</button>
+					<button onclick="listCreator('PL')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >15. PL</button>
+					<button onclick="listCreator('RTD')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >16. RTD</button>
+					<button onclick="listCreator('SK')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >17. SK</button> 
+					<button onclick="listCreator('SR')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >18. SR</button>
+					<button onclick="listCreator('STD')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >19. STD</button>
+					<button onclick="listCreator('TP')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >20. TP</button>
+					<button onclick="listCreator('VD')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >21. VD</button>   
+					<button onclick="listCreator('VRD')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >22. VRD</button>
+					<button onclick="listCreator('Amadavad')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >23. Amadavad</button>
+					<button onclick="listCreator('Rajkot')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >24. Rajkot</button>
+					<button onclick="listCreator('Vadodara')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >25. Vadodara</button>
+					<h1 class="text-2xl font-extrabold text-success mb-2">Out of Gujarat</h1>
+					<button onclick="listCreator('BY')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >26. BY</button>
+					<button onclick="listCreator('MP')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >27. MP</button> 
+					<button onclick="listCreator('NI')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >28. NI</button>
+					<button onclick="listCreator('SI')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >29. SI</button>
+					<h1 class="text-2xl font-extrabold text-success mb-2">Non Posting</h1>
+					<button onclick="listCreator('Surat')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >30. Surat</button>
+					<button onclick="listCreator('Bharuch')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >31. Bharuch</button>
+					<button onclick="listCreator('Jambusar')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >32. Jambusar</button>
+					<button onclick="listCreator('Padra')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >33. Padra</button>
+					<button onclick="listCreator('Navi Pradi')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >34. Navi Pradi</button>
+					<button onclick="listCreator('Free')" class="btn mb-2 bg-info font-extrabold text-white hover:bg-info-focus focus:bg-warning-focus active:bg-warning-focus/90" >35. Free</button>
+				</div>
+			</div>
+			<div id="tableContainer" class="card pb-4 w-[100%] mx-auto mt-3 pt-2 hidden z-1">
+				<div class='flex flex-wrap ml-3 mt-2 z-40 absolute top-2 left-3'>
+					<h1 class='text-2xl font-extrabold text-success m-3 mb-0' id='title'></h1>
+					<button onclick="excelExporter()" class='btn bg-warning w-48 font-bold text-white hover:bg-warning-focus focus:bg-warning-focus active:bg-warning-focus/90' >Download Excel</button>
+					<button onclick="labelExporter()" class='btn bg-error w-48 font-bold text-white hover:bg-error-focus focus:bg-error-focus active:bg-error-focus/90 ml-3' >Download Label</button>
+				</div>
+				<div id="table"></div>
+			</div>
+		</div>
+	</div>
+</main>
+<script src="https://www.google.com/recaptcha/api.js?render={{site_key}}"></script>
+<script>
+	var CSRF_TOKEN = '{{ csrf_token }}'
+	function listCreator(code)
+	{
+		let gRecaptchaToken = "";
+		grecaptcha.execute('{{site_key}}', {action: "/"}).then(function(token) {
+			gRecaptchaToken = token;    
+			const formData = new FormData();
+			formData.append("csrfmiddlewaretoken" , CSRF_TOKEN);
+			formData.append('code', code);
+			formData.append("g-recaptcha-response" , gRecaptchaToken);
+			fetch("/api/listFinder/", {
+				method: 'POST',
+				body: formData
+			})
+			.then(res =>res.json())
+			.then(d => {
+				console.log(d["data"]);
+				document.getElementById('tableContainer').classList.remove('hidden')
+				document.getElementById('tableContainer').innerHTML = `<div class='flex flex-wrap ml-3 mt-2 z-40 absolute top-2 left-3'>
+					<h1 class='text-2xl font-extrabold text-success m-3 mb-0' id='title'></h1>
+					<button onclick="excelExporter()" class='btn bg-warning w-48 font-bold text-white hover:bg-warning-focus focus:bg-warning-focus active:bg-warning-focus/90' >Download Excel</button>
+					<button onclick="labelExporter()" class='btn bg-error w-48 font-bold text-white hover:bg-error-focus focus:bg-error-focus active:bg-error-focus/90 ml-3' >Download Label</button>
+				</div><div id='table'></div>`
+				document.getElementById('title').innerHTML = code
+				new gridjs.Grid({
+					columns: ["SrNo","DistrictCode","Receipt No","Start Date","SubYear","End Date","Name","Add1","Add2","Add3","City","Taluka","District","State","Mobile","Pincode","Email","Remarks","Data Id"],
+					search: true,
+					fixedHeader: true,
+					resizable: true,
+					sort: true,
+					pagination: {
+					limit: 50
+					},
+					data: () => {
+					return new Promise(resolve => {
+						setTimeout(() =>
+						resolve(d["data"]), 2000);
+					});
+					},
+					className: {
+					table: 'table-body'
+					},
+					language: {
+					'search': {
+						'placeholder': 'Search name'
+					},
+					'pagination': {
+						'previous': '',
+						'next': '',
+						'showing': 'Displaying',
+						'results': () => 'Records'
+					}
+					}
+				}).render(document.getElementById("table"));
+				
+			})
+		})
+	}
+	function labelExporter()
+	{	
+		let gRecaptchaToken = "";
+		grecaptcha.execute('{{site_key}}', {action: "/"}).then(function(token) {
+			gRecaptchaToken = token;    
+			const formData = new FormData();
+			formData.append("csrfmiddlewaretoken" , CSRF_TOKEN);
+			formData.append("g-recaptcha-response" , gRecaptchaToken);
+			fetch("/api/labelExporter/", {
+				method: 'POST',
+				body: formData
+			})
+			.then(res =>res.json())
+			.then(d => {
+			})
+		})
+	}
+	function excelExporter()
+	{
+
+	}
+</script>
+{% endblock %}
