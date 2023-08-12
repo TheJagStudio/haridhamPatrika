@@ -26,7 +26,7 @@ def register(request):
         getUser = User.objects.filter(username=phoneNumber)
         if getUser:
             context = {"error": "User already exists"}
-            return render(request, "register.html", context=context)
+            return render(request, "calendarRegister.html", context=context)
         else:
             try:
                 newUser = User()
@@ -45,7 +45,7 @@ def register(request):
                 newCalendarUser.whatsapp = whatsappNumber
                 newCalendarUser.save()
                 context = {"success": "User created successfully"}
-                return render(request, "register.html", context=context)
+                return render(request, "calendarRegister.html", context=context)
             except Exception as e:
                 context = {"error": str(e)}
                 return render(request, "calendarRegister.html", context=context)
