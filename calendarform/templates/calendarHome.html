@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Calendar Form</title>
+        <link rel="shortcut icon" href="/static/images/SHA_logo.png" type="image/png">
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body>
+        <div style="background-image: url(/static/images/body-bg.jpg);background-size: cover;">
+            <div class="flex flex-1 flex-col w-full min-h-screen lg:w-fit lg:min-w-[50%] mx-auto">
+                <main class="bg-white/80 lg:bg-white/60 backdrop-blur-lg lg:my-10 rounded-none lg:rounded-2xl overflow-hidden shadow-xl min-h-screen lg:min-h-fit">
+                    <div class="mb-5">
+                        <a href="/calendar/" class="mx-auto px-4 py-10 sm:px-6 md:px-8 bg-[#ec7638] flex gap-8 shadow-xl">
+                            <img src="/static/images/SHA_logo.png" class="h-full w-10 scale-150">
+                            <h1 class="text-3xl font-bold text-white">Calendar Advertisement Form</h1>
+                        </a>
+                        <div class="mx-auto mt-8 px-4 sm:px-6 md:px-8">
+                            <div class="mt-6">
+                                <p class="text-4xl font-bold text-orange-600">Welcome, {{name}}</p>
+                            </div>
+                        </div>
+                        <div class="mx-auto w-xl {%if hasOrder == 0%}py-12 sm:px-6 sm:py-32 lg:px-8{%else%}py-10 sm:px-6 sm:py-5 lg:px-8{%endif%}">
+                            {%if hasOrder == 0%}
+                            <div class="relative isolate overflow-hidden bg-orange-400 px-6 py-24 text-center shadow-2xl sm:rounded-3xl sm:px-16">
+                                <h2 class="mx-auto max-w-2xl text-4xl font-bold tracking-tight text-white">You don't have a order</h2>
+                                <p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-white opacity-80">First go to ad form and then place a order for calendar and then you wil be able to see details about your order here.</p>
+                                <div class="mt-10 flex items-center justify-center gap-x-6">
+                                    <a href="/calendar/order" class="rounded-md bg-white px-3.5 py-1.5 text-base font-semibold leading-7 text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+                                        Go to AD Form
+                                        <span>→</span>
+                                    </a>
+                                </div>
+                            </div>
+                            {%else%}
+                            <p class="text-xl font-medium">
+                                Here is your order list
+                            </p>
+                            <a href="/calendar/order" class="text-orange-600 mb-3">Want to add new Order?</a>
+                            <ul class="flex flex-col gap-5 mt-5">
+                                {%for order in orders%}
+                                <li class="flex py-6 border-2  {%if order.isPaid%}border-green-600 bg-green-100/50 shadow-green-800/10{%else%}border-red-600 bg-red-100/50 shadow-red-800/10{%endif%} rounded-xl px-5  shadow-lg">
+                                    <div class="flex-shrink-0">
+                                        <img src="{{order.logo}}" alt="" class="h-24 w-24 rounded-lg object-cover object-center sm:h-32 sm:w-32 shadow">
+                                    </div>
+                                    <div class="ml-4 flex flex-1 flex-col sm:ml-6">
+                                        <div>
+                                            <div class="flex justify-between text-end">
+                                                <h4 class="text-lg font-semibold">
+                                                    Payment Mode : {{order.paymentMode}}
+                                                </h4>
+                                                <p class="ml-4 text-gray-900 relative">
+                                                    <span class="text-xl font-bold">₹{{order.totalAmount}}</span>
+                                                    <br>
+                                                    <span class="text-md font-normal absolute right-0 top-[110%]">
+                                                        Payment
+                                                        {% if order.isPaid%} Paid {%else%} Pending {%endif%}
+                                                    </span>
+                                                </p>
+                                            </div>
+                                            <h6 class="text-md font-semibold">
+                                                Order Id : {{order.id}}
+                                            </h6>
+                                            <p class="mt-1 text-sm text-gray-600">
+                                                No of Single Page Calendar :
+                                                <span class="font-bold">{{order.singleCount}}</span>
+                                            </p>
+                                            <p class="mt-1 text-sm text-gray-500">
+                                                No of Multiple Page Calendar :
+                                                <span class="font-bold">{{order.multiCount}}</span>
+                                            </p>
+                                            <p class="mt-1 text-sm text-gray-500">
+                                                Advertisement description :
+                                                <span class="font-bold">{{order.adDescription}}</span>
+                                            </p>
+                                            {% if order.gstNo != None %}
+                                            <p class="mt-1 text-sm text-gray-500">
+                                                GST No :
+                                                <span class="font-bold">{{order.gstNo}}</span>
+                                            </p>
+                                            {%endif%}
+                                            {% if order.gstNo != None %}
+                                            <p class="mt-1 text-sm text-gray-500">
+                                                PAN No :
+                                                <span class="font-bold">{{order.panNo}}</span>
+                                            </p>
+                                            {%endif%}
+                                        </div>
+                                        <div class="mt-4 flex flex-1 items-end justify-between">
+                                            <p class="flex items-center gap-1 space-x-2 text-sm text-gray-700">
+                                                <svg
+                                                    class="h-5 w-5 flex-shrink-0 text-green-500"
+                                                    x-description="Heroicon name: mini/check"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 20 20"
+                                                    fill="currentColor"
+                                                    aria-hidden="true"
+                                                >
+                                                    <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"></path>
+                                                </svg>
+                                                Status :
+                                                <span class="font-bold">{{order.status}}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                {%endfor%}
+                            </ul>
+                            {%endif%}
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </body>
+</html>

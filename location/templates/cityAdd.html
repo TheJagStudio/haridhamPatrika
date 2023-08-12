@@ -1,204 +1,474 @@
-
-<html lang="en">
-
-<head>
-    <script src="/static/tailwind.js"></script>
-    <script type="text/javascript" src="/static/jquery.js"></script>
-    <link rel="icon" type="image/x-icon" href="/static/SHA_logo.png">
-    <link rel="preload" href="/static/SHREE-GUJ7-0750.woff2" as="font" type="font/woff2">
-    <link rel="preload" href="/static/Shree-Guj-0768.woff2" as="font" type="font/woff2">
-    <title>Patrika Address Add Surat</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-
-<body class="bg-white md:bg-[#FFD07F]/25">
-    <div class="w-full md:w-[90%] lg:w-[90%] h-fit pb-5 mb-10 bg-white rounded-none md:rounded-2xl mx-0  md:mx-[5%] lg:mx-[5%] mt-0 md:mt-10 border-0 md:border-[1px] overflow-hidden">
-        <div class="w-full h-fit bg-[#FF8243] pt-10 md:pt-2 pb-2 flex flex-nowrap justify-between items-center mx-auto">
-            <h1 class="font-bold hidden md:block text-xl sm:text-2xl md:text-2xl lg:text-lg xl:text-2xl  text-white ml-5 max-w-[600px]">
-                Akshar&nbsp;Purushottam&nbsp;Satsang&nbsp;Patrika&nbsp;Address
-            </h1>
-            <h1 class="font-bold block md:hidden text-xl sm:text-2xl md:text-2xl lg:text-lg xl:text-2xl text-white ml-5 max-w-[600px]">
-                APSP
-            </h1>
-            <div class="flex flex-nowrap justify-between items-center">
-                <h1 class="font-bold text-md text-white mr-3">
-                    {{user.get_full_name}}
-                </h1>
-                <button type="" onclick="javascript:location.href='/logout'" class="w-20 h-6 bg-white rounded-full text-[#E26A2C] font-bold mr-5" style="box-shadow: inset 0px 0px 7px #C9C9C9;">
-                    Logout
-                </button>
-            </div>
+{% extends "base.html" %}
+{% block title %}Patrika - City Add{% endblock %}
+{% block content %}
+<main class="main-content w-full px-[var(--margin-x)] pb-8">
+    <div class="flex items-center space-x-4 py-5 lg:py-6">
+        <h2 class="text-xl font-medium text-slate-800 dark:text-navy-50 lg:text-2xl">
+            City Add
+        </h2>
+        <div class="hidden h-full py-1 sm:flex">
+            <div class="h-full w-px bg-slate-300 dark:bg-navy-600"></div>
         </div>
-        <div class="w-full h-12 bg-[#E26A2C] ">
-            <div class="flex flex-nowrap">
-                <div class="relative" onmouseenter="document.getElementById('SuratMenu').classList.remove('hidden')" onmouseleave="document.getElementById('SuratMenu').classList.add('hidden')">
-                    <button type="button" class="text-[#E26A2C] bg-white font-bold rounded-tl-lg text-md md:text-lg px-1 md:px-5 mt-3 text-center ml-2 md:ml-5 border-r-2 border-gray-500" style="box-shadow: inset 0px 0px 7px #C9C9C9;">Surat</button>
-                    <div id="SuratMenu" class="absolute hidden h-fit w-fit bg-white rounded-b-lg overflow-hidden translate-x-2 md:translate-x-5 " style="box-shadow: inset 0px 0px 7px #C9C9C9;">
-                        <h1 onclick="javascript:location.href='./suratAdd.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
-                            Surat&nbsp;Add
-                        </h1>
-                        <hr>
-                        <h1 onclick="javascript:location.href='./suratEdit.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
-                            Surat&nbsp;Edit
-                        </h1>
-                        <hr>
-                        <h1 onclick="javascript:location.href='./suratList.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
-                            Surat&nbsp;List
-                        </h1>
-                    </div>
-                </div>
-                <div class="relative" onmouseenter="document.getElementById('DistrictMenu').classList.remove('hidden')" onmouseleave="document.getElementById('DistrictMenu').classList.add('hidden')">
-                    <button type="button" class="text-[#E26A2C] bg-white font-bold text-md md:text-lg px-1 md:px-5 mt-3 text-center ml-0 border-r-2 border-gray-500 -translate-x-1" style="box-shadow: inset 0px 0px 7px #C9C9C9;">Address</button>
-                    <div id="DistrictMenu" class="absolute hidden h-fit w-fit bg-white rounded-b-lg overflow-hidden -translate-x-1" style="box-shadow: inset 0px 0px 7px #C9C9C9;">
-                        <h1 onclick="javascript:location.href='./districtAdd.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
-                            District&nbsp;Add
-                        </h1>
-                        <hr>
-                        <h1 onclick="javascript:location.href='./districtEdit.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
-                            District&nbsp;Edit
-                        </h1>
-                        <hr>
-                        <h1 onclick="javascript:location.href='./districtList.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
-                            District&nbsp;List
-                        </h1>
-                    </div>
-                </div>
-                <div class="relative" onmouseenter="document.getElementById('CityMenu').classList.remove('hidden')" onmouseleave="document.getElementById('CityMenu').classList.add('hidden')">
-                    <button type="button" class="text-[#E26A2C] bg-white font-bold text-md md:text-lg px-1 md:px-5 mt-3 text-center ml-0 border-r-2 border-gray-500 -translate-x-2" style="box-shadow: inset 0px 0px 7px #C9C9C9;">City</button>
-                    <div id="CityMenu" class="absolute hidden h-fit w-fit bg-white rounded-b-lg overflow-hidden -translate-x-2" style="box-shadow: inset 0px 0px 7px #C9C9C9;">
-                        <h1 onclick="javascript:location.href='/location'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
-                            City&nbsp;Add
-                        </h1>
-                        <hr>
-                        <h1 onclick="javascript:location.href='./cityEdit.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
-                            City&nbsp;Edit
-                        </h1>
-                        <hr>
-                        <h1 onclick="javascript:location.href='./CityDistrictAdd.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
-                            District&nbsp;Add
-                        </h1>
-                        <hr>
-                        <h1 onclick="javascript:location.href='./CityDistrictEdit.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
-                            District&nbsp;Edit
-                        </h1>
-                        <hr>
-                        <h1 onclick="javascript:location.href='./CityTalukaAdd.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
-                            Taluka&nbsp;Add
-                        </h1>
-                    </div>
-                </div>
-                <div class="relative" onmouseenter="document.getElementById('KaryakartaMenu').classList.remove('hidden')" onmouseleave="document.getElementById('KaryakartaMenu').classList.add('hidden')">
-                    <button type="button" class="text-[#E26A2C] bg-white font-bold text-md md:text-lg px-1 md:px-5 mt-3 text-center ml-0 border-r-2 border-gray-500 -translate-x-3" style="box-shadow: inset 0px 0px 7px #C9C9C9;">Karyakarta</button>
-                    <div id="KaryakartaMenu" class="absolute hidden h-fit w-fit bg-white rounded-b-lg overflow-hidden -translate-x-3" style="box-shadow: inset 0px 0px 7px #C9C9C9;">
-                        <h1 onclick="javascript:location.href='./karyakartaAdd.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
-                            Karyakarta&nbsp;Add
-                        </h1>
-                        <hr>
-                        <h1 onclick="javascript:location.href='./karyakartaEdit.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
-                            Karyakarta&nbsp;Edit
-                        </h1>
-                        <hr>
-                        <h1 onclick="javascript:location.href='./karyakartaList.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
-                            Karyakarta&nbsp;List
-                        </h1>
-                    </div>
-                </div>
-                <div class="relative" onmouseenter="document.getElementById('AdminMenu').classList.remove('hidden')" onmouseleave="document.getElementById('AdminMenu').classList.add('hidden')">
-                    <button type="button" class="text-[#E26A2C] bg-white font-bold rounded-tr-lg text-md md:text-lg px-1 md:px-5 mt-3 text-center ml-0 -translate-x-4" style="box-shadow: inset 0px 0px 7px #C9C9C9;">Admin</button>
-                    <div id="AdminMenu" class="absolute hidden h-22 w-fit bg-white rounded-b-lg overflow-hidden -translate-x-4" style="box-shadow: inset 0px 0px 7px #C9C9C9;">
-                        <h1 onclick="javascript:location.href='./duplicateEntry.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
-                            Duplicate&nbsp;Entry
-                        </h1>
-                        <hr>
-                        <h1 onclick="javascript:location.href='./pradeshList.html'" class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
-                            Pradesh&nbsp;List
-                        </h1>
-                        <hr>
-                        <h1 class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
-                            Admin&nbsp;Grid
-                        </h1>
-                        <hr>
-                        <h1 class="text-[#E26A2C] font-medium hover:bg-[#FF8243] hover:text-white px-3">
-                            All&nbsp;List
-                        </h1>
-                    </div>
-                </div>
+        <ul class="hidden flex-wrap items-center space-x-2 sm:flex">
+            <li class="flex items-center space-x-2">
+                <a class="text-primary transition-colors hover:text-primary-focus dark:text-accent-light dark:hover:text-accent" href="#">Location Menu</a>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 5l7 7-7 7"
+                    ></path>
+                </svg>
+            </li>
+            <li>City Add</li>
+        </ul>
+    </div>
+    {% if error != "" %}
+    <div id="alert-dismissable-1" data-dismiss-class="scale-0 transition-all duration-300" class="w-[80%] sm:w-[50%] mx-auto mb-2 alert flex items-center justify-between overflow-hidden rounded-lg border border-error text-error">
+        <div class="flex">
+            <div class="bg-error p-3 text-white">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                </svg>
             </div>
-            <div>
-            </div>
+            <div class="px-4 py-3 sm:px-5 w-fit">{{error}}</div>
         </div>
-        <h1 class="ml-5 mt-2 text-gray-600 font-bold">City Add Form</h1>
-        <button onclick="javascript:$('#formContainer').toggleClass('hidden')" class="text-base text-white font-bold ml-5 mt-2 rounded-full px-5 bg-[#E26A2C] hover:bg-[#E26A2C]/90 ">Add</button>
-        <h1 class="hidden ml-5 my-1 px-3 w-fit rounded-lg text-red-500 hover:text-green-500 bg-red-300/25 hover:bg-green-300/25 border-2 border-red-500 hover:border-green-500 font-bold ">
-            This is a sample msg/error
-        </h1>
-        <form action="./" method="post">
-            {% csrf_token %}
-            <div id="formContainer" class="mx-5 mt-2 text-gray-600 hidden">
-                <div class="flex flex-nowrap">
-                    <label for="cityName" class="mr-3 w-32">City&nbsp;Name</label>
-                    <input type="text" name="cityName" id="cityName" required class="border-2 rounded-lg px-2 mb-1 w-48">
-                </div>
-                <div class="flex flex-nowrap">
-                    <label for="District" class="mr-3 w-32">District</label>
-                    <input onchange="talukaSelector()" type="text" list="Districts" required name="District" id="District" class="border-2 rounded-lg px-2 mb-1 w-48">
-                    <datalist id="Districts" name="Districts" class="border-2 rounded-lg px-2 mb-1 w-48">
-                        <option value="" disabled selected>
-                        {% for district in districtArr %}
-                        <option value="{{district}}">
-                        {%endfor%}
-                    </datalist>
-                </div>
-                <div class="flex flex-nowrap ">
-                    <label for="Taluka" class="mr-3 w-32">Taluka</label>
-                    <select id="Taluka" name="Taluka" class="border-2 rounded-lg px-2 mb-1 w-48" required>
-                        <option value="" disabled selected>--Select--</option>
-                    </select>
-                </div>
-                <div class="flex flex-nowrap ">
-                    <label for="Pincode" class="mr-3 w-32">Pincode</label>
-                    <input type="number" name="Pincode" id="Pincode" min="111111" max="999999" required class="border-2 rounded-lg px-2 mb-1 w-48">
-                </div>
-                <div class="flex flex-nowrap ">
-                    <label for="Pradesh" class="mr-3 w-32">Pradesh</label>
-                    <select id="Pradesh" name="Pradesh" class="border-2 rounded-lg px-2 mb-1 w-48" required>
-                        <option value="" disabled selected>--Select--</option>
-                        {% for pradesh in pradeshArr %}
-                        <option value="{{pradesh}}">{{pradesh}}</option>
-                        {%endfor%}
-                    </select>
-                </div>
-                <div class="flex flex-nowrap gap-5">
-                    <button type="submit" class="text-base text-white font-bold mt-2 rounded-full px-5 bg-[#E26A2C] hover:bg-[#E26A2C]/90 ">Save</button>
-                    <button type="button" class="text-base text-white font-bold mt-2 rounded-full px-5 bg-[#E26A2C] hover:bg-[#E26A2C]/90 ">Clear</button>
-                </div>
-            </div>
-        </form>
+        <div class="px-2">
+            <button data-remove-alert class="btn h-7 w-7 rounded-full p-0 font-medium text-error hover:bg-error/20 focus:bg-error/20 active:bg-error/25">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"
+                    />
+                </svg>
+            </button>
+        </div>
     </div>
     <script>
-        var CSRF_TOKEN = '{{ csrf_token }}'
-        function talukaSelector()
-        {
-            let district = $("#District").val();
-            const formData = new FormData();
-            formData.append("csrfmiddlewaretoken" , CSRF_TOKEN);
-            formData.append('district', district);
-            fetch("/api/talukaFinder/", {
-                method: 'POST',
-                body: formData
-            })
-            .then(res =>res.json())
-            .then(d => {
-                talukaArr = d["data"];
-                $('#Taluka').empty().append('<option value="" disabled selected>--Select--</option>')
-                for(i=0;i<talukaArr.length;i++)
-                {
-                    $('#Taluka').append(`<option value="${talukaArr[i]}">${talukaArr[i]}</option>`);
-                }
-                
-            })
-        }
+					// Dismissable alert 1
+					const alert1 = document.querySelector("#alert-dismissable-1");
+					
+					alert1
+						.querySelector("[data-remove-alert]")
+						.addEventListener("click", () => {
+							alert1.classList.add(...alert1.dataset.dismissClass.trim().split(" "));
+							setTimeout(() => alert1.remove(), 300);
+					});
     </script>
-</body>
+    {% elif msg != "" %}
+    <div id="alert-dismissable-2" data-dismiss-class="scale-0 transition-all duration-300" class="w-[80%] sm:w-[50%] mx-auto mb-2 alert flex items-center justify-between overflow-hidden rounded-lg border border-success text-success">
+        <div class="flex">
+            <div class="bg-success p-3 text-white">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                </svg>
+            </div>
+            <div class="px-4 py-3 sm:px-5 w-fit">{{msg}}</div>
+        </div>
+        <div class="px-2">
+            <button data-remove-alert class="btn h-7 w-7 rounded-full p-0 font-medium text-success hover:bg-success/20 focus:bg-success/20 active:bg-success/25">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"
+                    />
+                </svg>
+            </button>
+        </div>
+    </div>
+    <script>
+        // Dismissable alert 1
+        const alert2 = document.querySelector("#alert-dismissable-2");
+        
+        alert2
+            .querySelector("[data-remove-alert]")
+            .addEventListener("click", () => {
+                alert2.classList.add(...alert2.dataset.dismissClass.trim().split(" "));
+                setTimeout(() => alert2.remove(), 300);
+            });
+    </script>
+    {%endif%}
+    <form action="/location/" method="post">
+        {% csrf_token %}
+        <input
+            type="text"
+            id="g-recaptcha-response"
+            name="g-recaptcha-response"
+            hidden
+        >
+        <div class="grid grid-cols-12 gap-4 sm:gap-5 lg:gap-6">
+            <div class="col-span-0 sm:col-span-2 "></div>
+            <div class="col-span-12 sm:col-span-8 ">
+                <div class="card p-4 sm:p-5">
+                    <div class="mt-4 space-y-4">
+                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                            <label class="block">
+                                <span>City Name</span>
+                                <span class="relative mt-1.5 flex">
+                                    <input
+                                        maxlength="50"
+                                        required
+                                        id="cityName"
+                                        name="cityName"
+                                        class="form-input peer w-full rounded-lg border border-slate-800 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                        placeholder="City Name"
+                                        type="text"
+                                    >
+                                    <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            class="bi bi-person"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+                                        </svg>
+                                    </span>
+                                </span>
+                            </label>
+                            <label class="block">
+                                <span>State</span>
+                                <span class="relative mt-1.5 flex">
+                                    <input
+                                        onchange="districtSelector()"
+                                        required
+                                        list="states"
+                                        id="state"
+                                        name="state"
+                                        class="form-input peer w-full rounded-lg border border-slate-800 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                        placeholder="Enter State"
+                                        type="text"
+                                    >
+                                    <datalist id="states" name="states" class="form-select mt-1.5 w-full rounded-lg bg-slate-150 px-3 py-2 ring-primary/50 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:hover:bg-navy-900 dark:focus:bg-navy-900">
+                                        {%for state in stateArr%}
+                                        <option>{{state}}</option>
+                                        {%endfor%}
+                                    </datalist>
+                                    <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            class="bi bi-flag-fill"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001"/>
+                                        </svg>
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                            <label class="block">
+                                <span>District</span>
+                                <span class="relative mt-1.5 flex">
+                                    <input
+                                        onchange="talukaSelector()"
+                                        required
+                                        list="districts"
+                                        id="district"
+                                        name="district"
+                                        class="form-input peer w-full rounded-lg border border-slate-800 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                        placeholder="Enter District"
+                                        type="text"
+                                    >
+                                    <datalist id="districts" name="districts" class="form-select mt-1.5 w-full rounded-lg bg-slate-150 px-3 py-2 ring-primary/50 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:hover:bg-navy-900 dark:focus:bg-navy-900"></datalist>
+                                    <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            class="bi bi-flag-fill"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001"/>
+                                        </svg>
+                                    </span>
+                                </span>
+                            </label>
+                            <label class="block">
+                                <span>Taluka</span>
+                                <span class="relative mt-1.5 flex">
+                                    <input
+                                        required
+                                        list="talukas"
+                                        id="taluka"
+                                        name="taluka"
+                                        class="form-input peer w-full rounded-lg border border-slate-800 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                        placeholder="Enter Taluka"
+                                        type="text"
+                                    >
+                                    <datalist id="talukas" name="talukas" class="form-select mt-1.5 w-full rounded-lg bg-slate-150 px-3 py-2 ring-primary/50 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:hover:bg-navy-900 dark:focus:bg-navy-900"></datalist>
+                                    <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            class="bi bi-flag-fill"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001"/>
+                                        </svg>
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                            <label class="block">
+                                <span>Pradesh</span>
+                                <span class="relative mt-1.5 flex">
+                                    <input
+                                        required
+                                        list="pradeshs"
+                                        id="pradesh"
+                                        name="pradesh"
+                                        class="form-input peer w-full rounded-lg border border-slate-800 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                        placeholder="Enter Pradesh"
+                                        type="text"
+                                    >
+                                    <datalist id="pradeshs" name="pradeshs" class="form-select mt-1.5 w-full rounded-lg bg-slate-150 px-3 py-2 ring-primary/50 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:hover:bg-navy-900 dark:focus:bg-navy-900">
+                                        {%for pradesh in pradeshArr%}
+                                        <option>{{pradesh}}</option>
+                                        {%endfor%}
+                                    </datalist>
+                                    <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            class="bi bi-flag-fill"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001"/>
+                                        </svg>
+                                    </span>
+                                </span>
+                            </label>
+                            <label class="block">
+                                <span>Pincode</span>
+                                <div class="relative mt-1.5 flex">
+                                    <input
+                                        required
+                                        id="pincode"
+                                        name="pincode"
+                                        min="111111"
+                                        max="999999"
+                                        class="form-input peer w-full rounded-lg border border-slate-800 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                        placeholder="Pincode"
+                                        type="text"
+                                    >
+                                    <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            class="bi bi-geo-fill"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z"/>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </label>
+                        </div>
+                        <div>
+                            <label class="block pt-4">
+                                <span>Remarks</span>
+                                <textarea
+                                    required
+                                    id="remark"
+                                    name="remark"
+                                    rows="2"
+                                    placeholder="Enter Some Remarks"
+                                    class="form-textarea mt-1.5 w-full rounded-lg border border-slate-800 bg-transparent p-2.5 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                ></textarea>
+                            </label>
+                        </div>
+                        <div class="flex justify-end space-x-2">
+                            <input type="reset" value="clear" class="btn space-x-2 bg-slate-150 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
+                            <input type="submit" class="btn space-x-2 bg-primary font-medium text-black dark:text-white hover:text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 bg-accent dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90"></input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
+<script>
+					const ReceiptDate = document.querySelector("#receiptDate");
+					ReceiptDate._datepicker = flatpickr(flatpiReceiptDateckr1);
+					const EndDate = document.querySelector("#endDate");
+					ReceipEndDatetDate._datepicker = flatpickr(flatpiEndDateckr1);
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0EXH02TZN7"></script>
+<script>
+					window.dataLayer = window.dataLayer || [];
+					function gtag(){dataLayer.push(arguments);}
+					gtag('js', new Date());
+					
+					gtag('config', 'G-0EXH02TZN7');
+</script>
+<script>
+				var CSRF_TOKEN = '{{ csrf_token }}'
 
-</html>
+				function districtSelector()
+				{
+					let district = $("#state").val();
+					let gRecaptchaToken = "";
+					grecaptcha.execute('{{site_key}}', {action: "/"}).then(function(token) {
+						gRecaptchaToken = token;
+						const formData = new FormData();
+						formData.append("csrfmiddlewaretoken" , CSRF_TOKEN);
+						formData.append("g-recaptcha-response" , gRecaptchaToken);
+						formData.append('state', district);
+						fetch("/api/districtFinder/", {
+							method: 'POST',
+							body: formData
+						})
+						.then(res =>res.json())
+						.then(d => {
+							districtArr = d["data"];
+							$('#districts').empty().append('<option disabled selected></option>')
+							for(i=0;i<districtArr.length;i++)
+							{
+								$('#districts').append(`<option >${districtArr[i]}</option>`);
+							}
+							
+						})
+					});
+				}
+				function talukaSelector()
+				{
+					let district = $("#district").val();
+					let gRecaptchaToken = "";
+					grecaptcha.execute('{{site_key}}', {action: "/"}).then(function(token) {
+						gRecaptchaToken = token;
+						const formData = new FormData();
+						formData.append("csrfmiddlewaretoken" , CSRF_TOKEN);
+						formData.append('district', district);
+						formData.append("g-recaptcha-response" , gRecaptchaToken);
+						fetch("/api/talukaFinder/", {
+							method: 'POST',
+							body: formData
+						})
+						.then(res =>res.json())
+						.then(d => {
+							talukaArr = d["data"];
+							$('#talukas').empty().append('<option disabled selected></option>')
+							for(i=0;i<talukaArr.length;i++)
+							{
+								$('#talukas').append(`<option >${talukaArr[i]}</option>`);
+							}
+							
+						})
+					})
+				}
+				function citySelector()
+				{
+					let district = $("#district").val();
+					let taluka = $("#taluka").val();
+					let gRecaptchaToken = "";
+					grecaptcha.execute('{{site_key}}', {action: "/"}).then(function(token) {
+						gRecaptchaToken = token;    
+						const formData = new FormData();
+						formData.append("csrfmiddlewaretoken" , CSRF_TOKEN);
+						formData.append('district', district);
+						formData.append('taluka', taluka);
+						formData.append("g-recaptcha-response" , gRecaptchaToken);
+						fetch("/api/cityFinder/", {
+							method: 'POST',
+							body: formData
+						})
+						.then(res =>res.json())
+						.then(d => {
+							cityArr = d["data"];
+							$('#citys').empty().append('<option disabled selected></option>')
+							for(i=0;i<cityArr.length;i++)
+							{
+								$('#citys').append(`<option >${cityArr[i]}</option>`);
+							}
+							
+						})
+					})
+				}
+				function endDateCalulator()
+				{
+					receiptDate = $("#receiptDate").val();
+					if(receiptDate.split("-")[0].length == 4)
+					{
+						$("#receiptDate").val(receiptDate.split("-")[2]+"-"+receiptDate.split("-")[1]+"-"+receiptDate.split("-")[0])
+						receiptDate = receiptDate.split("-")[2]+"-"+receiptDate.split("-")[1]+"-"+receiptDate.split("-")[0]
+					}
+					subYear = $("#subYear").val();
+					if(subYear == null)
+					{
+						subYear = 0
+					}
+					if (receiptDate != "")
+					{
+						$("#endDate").val(receiptDate.split("-")[0]+"-"+receiptDate.split("-")[1]+"-"+(parseInt(receiptDate.split("-")[2])+parseInt(subYear)).toString())
+					}
+					
+				}
+</script>
+<script src="https://www.google.com/recaptcha/api.js?render={{site_key}}"></script>
+<script>
+				grecaptcha.ready(function() {
+					grecaptcha.execute('{{site_key}}', {action: "/"}).then(function(token) {
+					document.getElementById('g-recaptcha-response').value = token;
+					});
+				});
+</script>
+{% endblock %}

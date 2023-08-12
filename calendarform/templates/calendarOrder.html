@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Calendar Form</title>
+        <link rel="shortcut icon" href="/static/images/SHA_logo.png" type="image/png">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            input[type="file"]::-webkit-file-upload-button {
+                background-color: #ec7638;
+                color: white;
+                border-radius: 5px;
+                border-color: #ec7638;
+            }
+            input[type="file"]::-webkit-file-upload-button:hover {
+                background-color: #ff8c4e;
+                color: white;
+                border-radius: 5px;
+                border-color: #ff8c4e;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="background-image: url(/static/images/body-bg.jpg);background-size: cover;">
+            <div class="flex flex-1 flex-col w-full min-h-screen lg:w-fit mx-auto">
+                <main class="bg-white/80 lg:bg-white/60 backdrop-blur-lg lg:my-10 rounded-none lg:rounded-2xl overflow-hidden shadow-xl">
+                    <div class="mb-5">
+                        <a href="/calendar/" class="mx-auto px-4 py-10 sm:px-6 md:px-8 bg-[#ec7638] flex gap-8 shadow-xl">
+                            <img src="/static/images/SHA_logo.png" class="h-full w-10 scale-150">
+                            <h1 class="text-3xl font-bold text-white">Calendar Advertisement Form</h1>
+                        </a>
+                        <div class="mx-auto mt-8 px-4 sm:px-6 md:px-8">
+                            <div class="mt-6">
+                                <p class="text-2xl font-bold text-orange-600">Place Order</p>
+                            </div>
+                            {% if error != None %}
+                            <p class="bg-red-200 rounded-lg p-1 px-2 mt-4 text-md text-red-800 font-bold border-2  border-red-500">{{ error }}</p>
+                            {% endif %}
+                            {% if success != None %}
+                            <p class="bg-green-200 rounded-lg p-1 px-2 mt-4 text-md text-green-800 font-bold border-2  border-green-500">{{ success }}</p>
+                            {% endif %}
+                            <form
+                                action="/calendar/order/"
+                                id="calendarForm"
+                                method="POST"
+                                class="mt-6 max-w-4xl"
+                                enctype="multipart/form-data"
+                            >
+                                {% csrf_token %}
+                                <div class="space-y-8">
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
+                                        <div>
+                                            <label for="singleCount" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">Number of Single & Mulitple Page Calendar</label>
+                                            <label for="profile" class="text-sm font-medium text-gray-500">Do not select if not needed</label>
+                                        </div>
+                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                            <div class="grid grid-cols-1 gap-x-4 gap-y-5 sm:grid-cols-2">
+                                                <div>
+                                                    <input
+                                                        type="number"
+                                                        name="singleCount"
+                                                        id="singleCount"
+                                                        placeholder="Single Page Calendar"
+                                                        value=""
+                                                        step="50"
+                                                        min="100"
+                                                        class="block w-full rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                                    >
+                                                </div>
+                                                <div>
+                                                    <input
+                                                        type="number"
+                                                        name="multiCount"
+                                                        id="multiCount"
+                                                        placeholder="Mulitple Page Calendar"
+                                                        value=""
+                                                        step="50"
+                                                        min="50"
+                                                        class="block w-full rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
+                                        <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">Calendar Advertisement Description</label>
+                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                            <textarea
+                                                name="adDescription"
+                                                id="adDescription"
+                                                placeholder="Enter full description for your Calendar Advertisement"
+                                                value=""
+                                                rows="4"
+                                                required
+                                                class="block w-full resize-y rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                                spellcheck="false"
+                                            ></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
+                                        <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">Company Logo</label>
+                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                            <input
+                                                type="file"
+                                                name="logo"
+                                                id="logo"
+                                                value=""
+                                                required
+                                                accept="image/*"
+                                                onchange="(()=>{
+                                                    if(this.files[0].size > 26214400){
+                                                        alert('File size can not be is larger than 25MB');
+                                                        this.value = '';
+                                                    }else{
+                                                        document.getElementById('logoPreview').src = window.URL.createObjectURL(this.files[0])
+                                                        document.getElementById('logoPreview').classList.remove('h-0')
+                                                        document.getElementById('logoPreview').classList.add('h-32')
+                                                    }
+                                                })()"
+                                                class="block w-full bg-white rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                            >
+                                            <img
+                                                src=""
+                                                alt=""
+                                                class="mt-2 object-contain rounded-lg h-0 w-32 rounded-lg"
+                                                id="logoPreview"
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
+                                        <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">Extra Files</label>
+                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                            <input
+                                                type="file"
+                                                name="extraFiles"
+                                                id="extraFiles"
+                                                value=""
+                                                multiple
+                                                onchange="(()=>{
+                                                    let files = this.files
+                                                    let preview = document.getElementById('extraFilesPreview')
+                                                    preview.innerHTML = ''
+                                                    for (var x in files) {
+                                                        var filesize = ((files[x].size/1024)/1024).toFixed(4);
+                                                        if (files[x].name != 'item' && typeof files[x].name != 'undefined') { 
+                                                            let newDiv = document.createElement('div')
+                                                            newDiv.classList.add('flex', 'flex-col', 'items-center')
+                                                            let img = document.createElement('img')
+                                                            if (files[x].type.includes('image')){
+                                                                img.src = window.URL.createObjectURL(files[x])
+                                                            } else{
+                                                                img.src = '/static/images/filePreview.png'
+                                                            }
+                                                            img.alt = files[x].name
+                                                            img.classList.add('mt-2', 'object-contain', 'rounded-lg','drop-shadow','w-full','h-auto','aspect-square')
+                                                            newDiv.appendChild(img)
+                                                            let p = document.createElement('p')
+                                                            p.classList.add('text-sm', 'font-bold', 'text-gray-900','truncate','w-24')
+                                                            p.innerText = files[x].name
+                                                            newDiv.appendChild(p)
+                                                            preview.appendChild(newDiv)
+                                                        }
+                                                    }
+                                                    
+                                                    
+                                                    // for(let i = 0; i < files.length; i++){
+                                                    //     let newDiv = document.createElement('div')
+                                                    //     newDiv.classList.add('flex', 'flex-col', 'items-center')
+                                                    //     let img = document.createElement('img')
+                                                    //     if (files[i].type.includes('image')){
+                                                    //         img.src = window.URL.createObjectURL(files[i])
+                                                    //     } else{
+                                                    //         img.src = '/static/images/filePreview.png'
+                                                    //     }
+                                                    //     img.alt = files[i].name
+                                                    //     img.classList.add('mt-2', 'object-contain', 'rounded-lg','drop-shadow','w-full','h-auto','aspect-square')
+                                                    //     newDiv.appendChild(img)
+                                                    //     let p = document.createElement('p')
+                                                    //     p.classList.add('text-sm', 'font-bold', 'text-gray-900','truncate','w-24')
+                                                    //     p.innerText = files[i].name
+                                                    //     newDiv.appendChild(p)
+                                                    //     preview.appendChild(newDiv)
+                                                    // }
+                                                })()"
+                                                class="block w-full bg-white rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                            >
+                                            <div id="extraFilesPreview" class="grid grid-cols-3 lg:grid-cols-6 gap-3"></div>
+                                        </div>
+                                    </div>
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
+                                        <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">Extra Files Description</label>
+                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                            <textarea
+                                                name="extraDescription"
+                                                id="extraDescription"
+                                                placeholder="Enter full description about extra files you added"
+                                                value=""
+                                                rows="4"
+                                                class="block w-full resize-y rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                                spellcheck="false"
+                                            ></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
+                                        <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">Old Calendar Design/Photo</label>
+                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                            <input
+                                                type="file"
+                                                name="oldPhoto"
+                                                id="oldPhoto"
+                                                value=""
+                                                accept="image/*"
+                                                onchange="(()=>{
+                                                    if(this.files[0].size > 26214400){
+                                                        alert('File size can not be is larger than 25MB');
+                                                        this.value = '';
+                                                    }else{
+                                                        document.getElementById('oldPhotoPreview').src = window.URL.createObjectURL(this.files[0])
+                                                    }
+                                                })()"
+                                                class="block w-full bg-white rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                            >
+                                            <img
+                                                src=""
+                                                alt=""
+                                                class="mt-2 object-contain rounded-lg"
+                                                id="oldPhotoPreview"
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
+                                        <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">GST Number</label>
+                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                            <input
+                                                type="text"
+                                                name="gstNo"
+                                                id="gstNo"
+                                                placeholder="22AAAAA0000A1Z5"
+                                                value=""
+                                                maxlength="15"
+                                                minlength="15"
+                                                class="block w-full rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
+                                        <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">PAN Number</label>
+                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                            <input
+                                                type="text"
+                                                name="panNo"
+                                                id="panNo"
+                                                placeholder="AAAAA1234A"
+                                                value=""
+                                                maxlength="10"
+                                                minlength="10"
+                                                class="block w-full rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-6 sm:mt-12 flex flex-nowrap gap-4 items-end justify-end w-full">
+                                    <button type="button" onclick="((event)=>{
+                                        let singleCount  = document.getElementById('singleCount').value
+                                        let multiCount  = document.getElementById('multiCount').value
+                                        if ((singleCount == 0 && multiCount == 0) || (singleCount == '' && multiCount == '') || (singleCount == 0 && multiCount == '') || (singleCount == '' && multiCount == 0)){
+                                            alert('Please add atleast one type of calendar')
+                                        }else{
+                                            document.getElementById('calendarForm').submit()
+                                        }
+                                    })()" class="inline-flex items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-sm font-semibold leading-5 text-white transition-all duration-200 hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:ring-offset-2">Next</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </body>
+</html>

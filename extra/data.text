@@ -1,0 +1,91 @@
+# zones = []
+# for data in dataJson:
+# if data["zone"] != "" and data["zone"] not in zones:
+# zones.append(data["zone"])
+# print(data["zone"])
+# data["city"] = '-'.join(map(str,
+# data["city"].split("-")[:-1])).strip()
+# zoneInstance = Zone()
+# zoneInstance.zoneName = data["zone"]
+# zoneInstance.city = City.objects.filter(
+# cityName=data["city"]).first()
+# zoneInstance.save()
+# for data in dataJson:
+# print(data["Name"])
+# try:
+# data["city"] = '-'.join(map(str,
+# data["city"].split("-")[:-1])).strip()
+# except:
+# pass
+# try:
+# if data["pincode"] == "0":
+# data["pincode"] = data["city"].split("-")[-1].strip()
+# except:
+# data["pincode"] = "0"
+# BhagatInstance = BhagatDetail()
+# BhagatInstance.disCount = data["disCode"]
+# BhagatInstance.dataid = ''.join(
+# random.choices(string.ascii_uppercase, k=6))
+# BhagatInstance.receiptNo = data["receiptNo"]
+# print(data["receiptDate"])
+# d = date(int(data["receiptDate"].split(
+# "/")[2]), int(data["receiptDate"].split("/")[1]), int(data["receiptDate"].split("/")[0]))
+# BhagatInstance.receiptDate = d
+# d = date(int(data["entryDate"].split(
+# "/")[2]), int(data["entryDate"].split("/")[1]), int(data["entryDate"].split("/")[0]))
+# BhagatInstance.entryDate = d
+# BhagatInstance.startDate = d
+# d = date(int(data["endDate"].split(
+# "/")[2]), int(data["endDate"].split("/")[1]), int(data["endDate"].split("/")[0]))
+# BhagatInstance.endDate = d
+# BhagatInstance.subYear = data["subYear"]
+# BhagatInstance.name = data["Name"]
+# BhagatInstance.email = ""
+# BhagatInstance.addressOne = data["Add1"]
+# BhagatInstance.addressTwo = data["Add2"]
+# BhagatInstance.addressThree = data["Add3"]
+# BhagatInstance.city = City.objects.filter(
+# cityName=data["city"]).first()
+# BhagatInstance.taluka = Taluka.objects.filter(
+# talukaName=data["taluka"]).first()
+# BhagatInstance.district = District.objects.filter(
+# districtName=data["district"]).first()
+# BhagatInstance.state = State.objects.filter(
+# city=BhagatInstance.city).first()
+# for key, value in districtArr.items():
+# if value == data["district"]:
+# BhagatInstance.districtCode = key
+# break
+# BhagatInstance.is_zone = bool(data["is_zone"])
+# try:
+# BhagatInstance.zone = Zone.objects.filter(
+# zoneName=data["zone"]).first()
+# except:
+# pass
+# BhagatInstance.phoneNum = data["mobile"]
+# BhagatInstance.newFlag = bool(data["newFlag"])
+# BhagatInstance.dontSendFlag = bool(data["dontSendFlag"])
+# BhagatInstance.pincode = data["pincode"]
+# BhagatInstance.remark = data["remark"]
+# BhagatInstance.is_active = False
+# BhagatInstance.save()
+#for data in BhagatDetail.objects.all():
+# qr = qrcode.QRCode(
+# error_correction=qrcode.constants.ERROR_CORRECT_L,
+# box_size=5,
+# border=0,
+# )
+# qr.add_data('http://192.168.1.24:8080/profile/'+data.dataid+'/')
+# qr.make(fit=True)
+#
+# img = qr.make_image(fill_color="black",
+# back_color="white",
+# image_factory=StyledPilImage,
+# module_drawer=RoundedModuleDrawer())
+#
+# buffer = BytesIO()
+# img.save(buffer, 'PNG')
+# img_str = base64.b64encode(buffer.getvalue())
+# data.qrcode = img_str
+# print(data.dataid)
+# data.save()

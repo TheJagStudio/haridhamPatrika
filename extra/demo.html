@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Jaivin Demo</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="bg-[#22252d]">
+        <div class="flex flex-nowrap gap-2 p-1 bg-[#292d36] h-14 w-fit rounded-lg shadow-lg absolute top-5 left-1/2 -translate-x-1/2 transition-all duration-300">
+            <div class="w-12 h-full text-white opacity-70 hover:opacity-100 flex items-center justify-center transition-all duration-300">
+                <svg
+                    width="25"
+                    height="25"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path d="m5.64 17-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm7-7a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1ZM5.64 7.05a1 1 0 0 0 .7.29 1 1 0 0 0 .71-.29 1 1 0 0 0 0-1.41l-.71-.71a1 1 0 0 0-1.41 1.41Zm12 .29a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.64.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-9 8a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Zm6.36-2A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 3.5-3.5 3.5 3.5 0 0 1-3.5 3.5Z"/>
+                </svg>
+            </div>
+            <div class="w-12 h-full text-white bg-[#22252d] rounded-md flex items-center justify-center transition-all duration-300">
+                <svg
+                    width="25"
+                    height="25"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path d="M21.64 13a1 1 0 0 0-1.05-.14 8.05 8.05 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.79 9.79 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32Z"/>
+                </svg>
+            </div>
+        </div>
+        <div class="w-full h-[40vh] flex items-end">
+            <div class="w-full flex justify-end">
+                <p id="result" class="bg-transparent h-20 outline-none text-white text-6xl text-right mr-10 mb-10"></p>
+            </div>
+        </div>
+        <div class="grid grid-cols-4 gap-10 gap-y-2 p-10 bg-[#292d36] w-full h-[60vh] rounded-t-[40px] overflow-hidden shadow-xl">
+            <div onclick="clearValue()" class="bg-[#22252d] rounded-xl p-2 w-full h-full shadow-[inset_-2px_-2px_6px_2px_rgba(0,0,0,1)] shadow-white/40 flex items-center justify-center transition-all duration-100">
+                <p class="bg-[#393e4b] rounded-lg -translate-y-1 shadow-lg shadow-white/10 w-full h-full text-center pt-2 text-green-300 text-2xl font-semibold hover:translate-y-0 transition-all duration-100">
+                    AC
+                </p>
+            </div>
+            <div onclick="addValue('^')" class="bg-[#22252d] rounded-xl p-2 w-full h-full shadow-[inset_-2px_-2px_6px_2px_rgba(0,0,0,1)] shadow-white/40 flex items-center justify-center transition-all duration-100">
+                <p class="bg-[#393e4b] rounded-lg -translate-y-1 shadow-lg shadow-white/10 w-full h-full text-center pt-2 text-green-300 text-2xl font-semibold hover:translate-y-0 transition-all duration-100">
+                    ^
+                </p>
+            </div>
+            <div onclick="addValue('%')" class="bg-[#22252d] rounded-xl p-2 w-full h-full shadow-[inset_-2px_-2px_6px_2px_rgba(0,0,0,1)] shadow-white/40 flex items-center justify-center transition-all duration-100">
+                <p class="bg-[#393e4b] rounded-lg -translate-y-1 shadow-lg shadow-white/10 w-full h-full text-center pt-2 text-green-300 text-2xl font-semibold hover:translate-y-0 transition-all duration-100">
+                    %
+                </p>
+            </div>
+            <div onclick="addSymbol('/')" class="bg-[#22252d] rounded-xl p-2 w-full h-full shadow-[inset_-2px_-2px_6px_2px_rgba(0,0,0,1)] shadow-white/40 flex items-center justify-center transition-all duration-100">
+                <p class="bg-[#393e4b] rounded-lg -translate-y-1 shadow-lg shadow-white/10 w-full h-full text-center pt-2 text-red-400 text-2xl font-semibold hover:translate-y-0 transition-all duration-100">
+                    /
+                </p>
+            </div>
+            <div onclick="addValue('7')" class="bg-[#22252d] rounded-xl p-2 w-full h-full shadow-[inset_-2px_-2px_6px_2px_rgba(0,0,0,1)] shadow-white/40 flex items-center justify-center transition-all duration-100">
+                <p class="bg-[#393e4b] rounded-lg -translate-y-1 shadow-lg shadow-white/10 w-full h-full text-center pt-2 text-white text-2xl font-semibold hover:translate-y-0 transition-all duration-100">
+                    7
+                </p>
+            </div>
+            <div onclick="addValue('8')" class="bg-[#22252d] rounded-xl p-2 w-full h-full shadow-[inset_-2px_-2px_6px_2px_rgba(0,0,0,1)] shadow-white/40 flex items-center justify-center transition-all duration-100">
+                <p class="bg-[#393e4b] rounded-lg -translate-y-1 shadow-lg shadow-white/10 w-full h-full text-center pt-2 text-white text-2xl font-semibold hover:translate-y-0 transition-all duration-100">
+                    8
+                </p>
+            </div>
+            <div onclick="addValue('9')" class="bg-[#22252d] rounded-xl p-2 w-full h-full shadow-[inset_-2px_-2px_6px_2px_rgba(0,0,0,1)] shadow-white/40 flex items-center justify-center transition-all duration-100">
+                <p class="bg-[#393e4b] rounded-lg -translate-y-1 shadow-lg shadow-white/10 w-full h-full text-center pt-2 text-white text-2xl font-semibold hover:translate-y-0 transition-all duration-100">
+                    9
+                </p>
+            </div>
+            <div onclick="addSymbol('*')" class="bg-[#22252d] rounded-xl p-2 w-full h-full shadow-[inset_-2px_-2px_6px_2px_rgba(0,0,0,1)] shadow-white/40 flex items-center justify-center transition-all duration-100">
+                <p class="bg-[#393e4b] rounded-lg -translate-y-1 shadow-lg shadow-white/10 w-full h-full text-center pt-2 text-red-400 text-2xl font-semibold hover:translate-y-0 transition-all duration-100">
+                    X
+                </p>
+            </div>
+            <div onclick="addValue('4')" class="bg-[#22252d] rounded-xl p-2 w-full h-full shadow-[inset_-2px_-2px_6px_2px_rgba(0,0,0,1)] shadow-white/40 flex items-center justify-center transition-all duration-100">
+                <p class="bg-[#393e4b] rounded-lg -translate-y-1 shadow-lg shadow-white/10 w-full h-full text-center pt-2 text-white text-2xl font-semibold hover:translate-y-0 transition-all duration-100">
+                    4
+                </p>
+            </div>
+            <div onclick="addValue('5')" class="bg-[#22252d] rounded-xl p-2 w-full h-full shadow-[inset_-2px_-2px_6px_2px_rgba(0,0,0,1)] shadow-white/40 flex items-center justify-center transition-all duration-100">
+                <p class="bg-[#393e4b] rounded-lg -translate-y-1 shadow-lg shadow-white/10 w-full h-full text-center pt-2 text-white text-2xl font-semibold hover:translate-y-0 transition-all duration-100">
+                    5
+                </p>
+            </div>
+            <div onclick="addValue('6')" class="bg-[#22252d] rounded-xl p-2 w-full h-full shadow-[inset_-2px_-2px_6px_2px_rgba(0,0,0,1)] shadow-white/40 flex items-center justify-center transition-all duration-100">
+                <p class="bg-[#393e4b] rounded-lg -translate-y-1 shadow-lg shadow-white/10 w-full h-full text-center pt-2 text-white text-2xl font-semibold hover:translate-y-0 transition-all duration-100">
+                    6
+                </p>
+            </div>
+            <div onclick="addSymbol('-')" class="bg-[#22252d] rounded-xl p-2 w-full h-full shadow-[inset_-2px_-2px_6px_2px_rgba(0,0,0,1)] shadow-white/40 flex items-center justify-center transition-all duration-100">
+                <p class="bg-[#393e4b] rounded-lg -translate-y-1 shadow-lg shadow-white/10 w-full h-full text-center pt-2 text-red-400 text-2xl font-semibold hover:translate-y-0 transition-all duration-100">
+                    -
+                </p>
+            </div>
+            <div onclick="addValue('1')" class="bg-[#22252d] rounded-xl p-2 w-full h-full shadow-[inset_-2px_-2px_6px_2px_rgba(0,0,0,1)] shadow-white/40 flex items-center justify-center transition-all duration-100">
+                <p class="bg-[#393e4b] rounded-lg -translate-y-1 shadow-lg shadow-white/10 w-full h-full text-center pt-2 text-white text-2xl font-semibold hover:translate-y-0 transition-all duration-100">
+                    1
+                </p>
+            </div>
+            <div onclick="addValue('2')" class="bg-[#22252d] rounded-xl p-2 w-full h-full shadow-[inset_-2px_-2px_6px_2px_rgba(0,0,0,1)] shadow-white/40 flex items-center justify-center transition-all duration-100">
+                <p class="bg-[#393e4b] rounded-lg -translate-y-1 shadow-lg shadow-white/10 w-full h-full text-center pt-2 text-white text-2xl font-semibold hover:translate-y-0 transition-all duration-100">
+                    2
+                </p>
+            </div>
+            <div onclick="addValue('3')" class="bg-[#22252d] rounded-xl p-2 w-full h-full shadow-[inset_-2px_-2px_6px_2px_rgba(0,0,0,1)] shadow-white/40 flex items-center justify-center transition-all duration-100">
+                <p class="bg-[#393e4b] rounded-lg -translate-y-1 shadow-lg shadow-white/10 w-full h-full text-center pt-2 text-white text-2xl font-semibold hover:translate-y-0 transition-all duration-100">
+                    3
+                </p>
+            </div>
+            <div onclick="addSymbol('+')" class="bg-[#22252d] rounded-xl p-2 w-full h-full shadow-[inset_-2px_-2px_6px_2px_rgba(0,0,0,1)] shadow-white/40 flex items-center justify-center transition-all duration-100">
+                <p class="bg-[#393e4b] rounded-lg -translate-y-1 shadow-lg shadow-white/10 w-full h-full text-center pt-2 text-red-400 text-2xl font-semibold hover:translate-y-0 transition-all duration-100">
+                    +
+                </p>
+            </div>
+            <div onclick="undo()" class="bg-[#22252d] rounded-xl p-2 w-full h-full shadow-[inset_-2px_-2px_6px_2px_rgba(0,0,0,1)] shadow-white/40 flex items-center justify-center transition-all duration-100">
+                <svg
+                    class="bg-[#393e4b] rounded-lg -translate-y-1 shadow-lg shadow-white/10 w-full h-full text-center text-white text-2xl font-semibold hover:translate-y-0 transition-all duration-100"
+                    width="20"
+                    height="20"
+                    viewBox="-2 -2 30 30"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path d="M12.207 2.293a1 1 0 0 1 0 1.414L10.914 5H12.5c4.652 0 8.5 3.848 8.5 8.5S17.152 22 12.5 22 4 18.152 4 13.5a1 1 0 1 1 2 0c0 3.548 2.952 6.5 6.5 6.5s6.5-2.952 6.5-6.5S16.048 7 12.5 7h-1.586l1.293 1.293a1 1 0 0 1-1.414 1.414l-3-3a1 1 0 0 1 0-1.414l3-3a1 1 0 0 1 1.414 0z"/>
+                </svg>
+            </div>
+            <div onclick="addValue('0')" class="bg-[#22252d] rounded-xl p-2 w-full h-full shadow-[inset_-2px_-2px_6px_2px_rgba(0,0,0,1)] shadow-white/40 flex items-center justify-center transition-all duration-100">
+                <p class="bg-[#393e4b] rounded-lg -translate-y-1 shadow-lg shadow-white/10 w-full h-full text-center pt-2 text-white text-2xl font-semibold hover:translate-y-0 transition-all duration-100">
+                    0
+                </p>
+            </div>
+            <div onclick="addValue('.')" class="bg-[#22252d] rounded-xl p-2 w-full h-full shadow-[inset_-2px_-2px_6px_2px_rgba(0,0,0,1)] shadow-white/40 flex items-center justify-center transition-all duration-100">
+                <p class="bg-[#393e4b] rounded-lg -translate-y-1 shadow-lg shadow-white/10 w-full h-full text-center pt-2 text-white text-2xl font-semibold hover:translate-y-0 transition-all duration-100">
+                    .
+                </p>
+            </div>
+            <div onclick="calculateValue()" class="bg-[#22252d] rounded-xl p-2 w-full h-full shadow-[inset_-2px_-2px_6px_2px_rgba(0,0,0,1)] shadow-white/40 flex items-center justify-center transition-all duration-100">
+                <p class="bg-[#393e4b] rounded-lg -translate-y-1 shadow-lg shadow-white/10 w-full h-full text-center pt-2 text-red-400 text-2xl font-semibold hover:translate-y-0 transition-all duration-100">
+                    =
+                </p>
+            </div>
+        </div>
+        <script>
+		let result = document.getElementById("result");
+		function addValue(val) {
+			result.innerHTML += val;
+		}
+        function addSymbol(val) {
+            result.innerHTML += "<span class='text-red-300 text-6xl'>"+val+"</span>";
+        }
+        function clearValue(){
+            result.innerHTML = "";
+        }
+        function calculateValue(){
+            result.innerHTML = eval(result.innerText)
+        }
+        function undo(){
+            console.log(result.innerHTML.split("<span"));
+            result.innerHTML = result.innerHTML.split("<span").slice(0, -1).join("<span>");
+        }
+        </script>
+    </body>
+</html>

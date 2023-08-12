@@ -1,505 +1,785 @@
 {% extends "base.html" %}
 {% block title %}Patrika - User Edit{% endblock %}
 {% block content %}
-	<main class="main-content w-full px-[var(--margin-x)] pb-8">
-				<div class="flex items-center space-x-4 py-5 lg:py-6">
-					<h2 class="text-xl font-medium text-slate-800 dark:text-navy-50 lg:text-2xl">
-						User Edit
-					</h2>
-					<div class="hidden h-full py-1 sm:flex">
-						<div class="h-full w-px bg-slate-300 dark:bg-navy-600"></div>
-					</div>
-					<ul class="hidden flex-wrap items-center space-x-2 sm:flex">
-						<li class="flex items-center space-x-2">
-							<a class="text-primary transition-colors hover:text-primary-focus dark:text-accent-light dark:hover:text-accent" href="#">User Menu</a>
-							<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-							</svg>
-						</li>
-						<li>User Edit</li>
-					</ul>
-				</div>
-				{% if error != "" %}
-				<div id="alert-dismissable-1" data-dismiss-class="scale-0 transition-all duration-300" class="w-[80%] sm:w-[50%] mx-auto mb-2 alert flex items-center justify-between overflow-hidden rounded-lg border border-error text-error">
-					<div class="flex">
-						<div class="bg-error p-3 text-white">
-							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-							</svg>
-						</div>
-						<div class="px-4 py-3 sm:px-5 w-fit">{{error}}</div>
-					</div>
-					<div class="px-2">
-						<button data-remove-alert class="btn h-7 w-7 rounded-full p-0 font-medium text-error hover:bg-error/20 focus:bg-error/20 active:bg-error/25" >
-							<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-							</svg>
-						</button>
-					</div>
-				</div>
-				<script>
-					// Dismissable alert 1
-					const alert1 = document.querySelector("#alert-dismissable-1");
-					
-					alert1
-					  .querySelector("[data-remove-alert]")
-					  .addEventListener("click", () => {
-					    alert1.classList.add(...alert1.dataset.dismissClass.trim().split(" "));
-					    setTimeout(() => alert1.remove(), 300);
-					  });
-				</script>  
-				{% elif msg != "" %}
-				<div id="alert-dismissable-2" data-dismiss-class="scale-0 transition-all duration-300" class="w-[80%] sm:w-[50%] mx-auto mb-2 alert flex items-center justify-between overflow-hidden rounded-lg border border-success text-success">
-					<div class="flex">
-						<div class="bg-success p-3 text-white">
-							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-							</svg>
-						</div>
-						<div class="px-4 py-3 sm:px-5 w-fit">{{msg}}</div>
-					</div>
-					<div class="px-2">
-						<button data-remove-alert class="btn h-7 w-7 rounded-full p-0 font-medium text-success hover:bg-success/20 focus:bg-success/20 active:bg-success/25" >
-							<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-							</svg>
-						</button>
-					</div>
-				</div>
-				<script>
-					// Dismissable alert 1
-					const alert2 = document.querySelector("#alert-dismissable-2");
-					
-					alert2
-					  .querySelector("[data-remove-alert]")
-					  .addEventListener("click", () => {
-					    alert2.classList.add(...alert2.dataset.dismissClass.trim().split(" "));
-					    setTimeout(() => alert2.remove(), 300);
-					  });
-				</script> 
-				{%endif%} 
-				<div class="grid grid-cols-12 gap-4 sm:gap-5 lg:gap-6">
-					<div class="col-span-0 sm:col-span-2 "></div>
-					<div class="col-span-12 sm:col-span-8 ">
-						<div class="card p-4 sm:p-5">
-							<div class="mt-4 space-y-4">
-								<form action="/useredit/" method="post">
-									{% csrf_token %}
-									<div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-										<div class="grid grid-cols-2 gap-4">
-											<label class="block">
-											<span>Receipt No</span>
-											<span class="relative mt-1.5 flex">
-											<input id="receiptNo" name="receiptNo" class="form-input peer w-full rounded-lg border border-slate-700 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Enter Receipt No" type="text">
-											<span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
-											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-															<path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
-														</svg>
-											</span>
-											</span>
-											</label>  
-											<label class="block">
-											<span>&nbsp;</span>
-											<span class="relative mt-1.5 flex">
-											<button type="button" onclick="dataFetcher('receiptNo')" class="btn bg-blue-500 w-32 font-medium text-white text-right hover:bg-info-focus focus:bg-info-focus active:bg-info-focus/90" >
-											Search
-											</button>
-											<span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
-											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-search" viewBox="0 0 16 16">
-														<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-													</svg>
-											</span>
-											</span>
-											</label> 
-										</div>
-										<div class="grid grid-cols-2 gap-4">
-											<label class="block">
-											<span>Registration No</span>
-											<span class="relative mt-1.5 flex">
-											<input id="registrationNo" name="registrationNo" class="form-input peer w-full rounded-lg border border-slate-700 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Enter Registration No" type="text">
-											<span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
-											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-															<path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
-														</svg>
-											</span>
-											</span>
-											</label>  
-											<label class="block">
-											<span>&nbsp;</span>
-											<span class="relative mt-1.5 flex">
-											<button type="button" onclick="dataFetcher('registrationNo')" class="btn bg-blue-500 w-32 font-medium text-white text-right hover:bg-info-focus focus:bg-info-focus active:bg-info-focus/90" >
-											Search
-											</button>
-											<span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
-											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-search" viewBox="0 0 16 16">
-														<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-													</svg>
-											</span>
-											</span>
-											</label> 
-										</div>
-									</div>
-									<input type="text" id="g-recaptcha-response" name="g-recaptcha-response" hidden/>
-									<div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
-										<label class="block">
-											<span>Receipt Date</span>
-											<span class="relative mt-1.5 flex">
-												<input onchange="endDateCalulator()"  id="receiptDate" name="receiptDate" class="form-input peer w-full rounded-lg border  border-slate-700 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Choose date..." type="text"/>
-												<span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
-													<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-														<path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-													</svg>
-												</span>
-											</span>
-										</label>
-										<label class="block">
-											<span>Subscription years</span>
-											<span class="relative mt-1.5 flex">
-												<select onchange="endDateCalulator()"   id="subYear" name="subYear" class="form-select  w-full rounded-lg border border-slate-700 bg-white px-3 py-2 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent">
-													<option value="0" selected disabled>0</option>
-													<option value="1">1</option>
-													<option value="2">2</option>
-													<option value="3">3</option>
-												</select>
-											</span>
-										</label>
-										<label class="block">
-											<span>End Date</span>
-											<span class="relative mt-1.5 flex">
-												<input  id="endDate" name="endDate" class="form-input peer w-full rounded-lg border border-slate-700 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Choose date..." type="text"/>
-												<span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
-													<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-														<path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-													</svg>
-												</span>
-											</span>
-										</label>
-									</div>
-									<div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
-										<label class="block">
-										<span>Name</span>
-										<span class="relative mt-1.5 flex">
-										<input  id="name" name="name" class="form-input peer w-full rounded-lg border border-slate-700 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Your Name" type="text">
-										<span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-											<path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
-										</svg>
-										</span>
-										</span>
-										</label>
-										<label class="block">
-											<span>Email Address</span>
-											<div class="relative mt-1.5 flex">
-												<input  id="email" name="email" class="form-input peer w-full rounded-lg border border-slate-700 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Email address" type="email">
-												<span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
-												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
-															<path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
-														</svg>
-												</span>
-											</div>
-										</label>
-										<label class="block">
-										<span>Mobile number</span>
-										<span class="relative mt-1.5 flex">
-										<input  id="phone" name="phone" min="1000000000" max="9999999999" class="form-input peer w-full rounded-lg border border-slate-700 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="(999) 999-9999" type="text">
-										<span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
-															<path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
-														</svg>
-										</span>
-										</span>
-										</label>
-									</div>
-									<div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
-										<label class="block">
-										<span>Address 1</span>
-										<textarea  id="address1" name="address1" rows="1" placeholder="Your Address 1" class="form-textarea mt-1.5 w-full rounded-lg border border-slate-700 bg-transparent p-2.5 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"></textarea>
-										</label>
-										<label class="block">
-										<span>Address 2</span>
-										<textarea  id="address2" name="address2" rows="1" placeholder="Your Address 2" class="form-textarea mt-1.5 w-full rounded-lg border border-slate-700 bg-transparent p-2.5 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"></textarea>
-										</label>
-										<label class="block">
-										<span>Address 3</span>
-										<textarea  id="address3" name="address3" rows="1" placeholder="Your Address 3" class="form-textarea mt-1.5 w-full rounded-lg border border-slate-700 bg-transparent p-2.5 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"></textarea>
-										</label>
-									</div>
-									<div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
-										<label class="block">
-											<span>State</span>
-											<span class="relative mt-1.5 flex">
-												<input onchange="districtSelector()"  list="states" id="state" name="state" class="form-input peer w-full rounded-lg border border-slate-700 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Enter State" type="text">
-												<datalist id="states" name="states" class="form-select mt-1.5 w-full rounded-lg bg-slate-150 px-3 py-2 ring-primary/50 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:hover:bg-navy-900 dark:focus:bg-navy-900">
-													{%for state in stateArr%}
-													<option>{{state}}</option>
-													{%endfor%}
-												</datalist>
-												<span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
-												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-flag-fill" viewBox="0 0 16 16">
-															<path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001"/>
-														</svg>
-												</span>
-											</span>
-										</label>
-										<label class="block">
-											<span>District</span>
-											<span class="relative mt-1.5 flex">
-												<input onchange="talukaSelector()"  list="districts" id="district" name="district" class="form-input peer w-full rounded-lg border border-slate-700 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Enter District" type="text">
-												<datalist id="districts" name="districts" class="form-select mt-1.5 w-full rounded-lg bg-slate-150 px-3 py-2 ring-primary/50 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:hover:bg-navy-900 dark:focus:bg-navy-900">
-												</datalist>
-												<span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
-												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-flag-fill" viewBox="0 0 16 16">
-															<path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001"/>
-														</svg>
-												</span>
-											</span>
-										</label>
-										<label class="block">
-											<span>Taluka</span>
-											<span class="relative mt-1.5 flex">
-												<input onchange="citySelector()"  list="talukas" id="taluka" name="taluka" class="form-input peer w-full rounded-lg border border-slate-700 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Enter Taluka" type="text">
-												<datalist id="talukas" name="talukas" class="form-select mt-1.5 w-full rounded-lg bg-slate-150 px-3 py-2 ring-primary/50 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:hover:bg-navy-900 dark:focus:bg-navy-900">
-												</datalist>
-												<span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
-												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-flag-fill" viewBox="0 0 16 16">
-															<path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001"/>
-														</svg>
-												</span>
-											</span>
-										</label>
-									</div>
-									<div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
-										<label class="block">
-											<span>City</span>
-											<span class="relative mt-1.5 flex">
-												<input  list="citys" id="city" name="city" class="form-input peer w-full rounded-lg border border-slate-700 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Enter City" type="text">
-												<datalist id="citys" name="citys" class="form-select mt-1.5 w-full rounded-lg bg-slate-150 px-3 py-2 ring-primary/50 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:hover:bg-navy-900 dark:focus:bg-navy-900">
-												</datalist>
-												<span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
-												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-building" viewBox="0 0 16 16">
-															<path d="M4 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1ZM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Z"/>
-															<path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V1Zm11 0H3v14h3v-2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V15h3V1Z"/>
-														</svg>
-												</span>
-											</span>
-										</label>
-										<label class="block">
-											<span>Pincode</span>
-											<div class="relative mt-1.5 flex">
-												<input  id="pincode" name="pincode" min="111111" max="999999" class="form-input peer w-full rounded-lg border border-slate-700 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Pincode" type="text">
-												<span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
-												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-fill" viewBox="0 0 16 16">
-															<path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z"/>
-														</svg>
-												</span>
-											</div>
-										</label>
-										<div class="flex flex-nowrap gap-1">
-											<label class="inline-flex items-center space-x-2 w-1/6">
-												<input id="is_zone" name="is_zone" onchange="javascript:if(document.getElementById('is_zone').value == 'false'){document.getElementById('is_zone').value='true';document.getElementById('zoneContainer').classList.remove('hidden')}else{document.getElementById('is_zone').value='false';document.getElementById('zoneContainer').classList.add('hidden')}" class="form-checkbox is-basic h-5 w-5 rounded bg-slate-100 border-slate-400/70 checked:!bg-info checked:!border-info hover:!border-info focus:!border-info dark:bg-navy-900 dark:border-navy-500" type="checkbox" value="false">
-												<p>Zone</p>
-											</label>
-											<label id="zoneContainer" class="block w-5/6 hidden">
-												<span class="relative mt-3 flex">
-													<input list="zones" id="zone" name="zone" class="form-input peer w-full rounded-lg border border-slate-700 bg-transparent px-3 py-2 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Enter Zone" type="text">
-													<datalist id="zones" name="zones" class="form-select mt-1.5 w-full rounded-lg bg-slate-150 px-3 py-2 ring-primary/50 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:hover:bg-navy-900 dark:focus:bg-navy-900">
-													</datalist>
-												</span>
-											</label>
-										</div>
-									</div>
-									<div>
-										<label class="block pt-4">
-										<span>Remarks</span>
-										<textarea  id="remark" name="remark" rows="2" placeholder="Enter Some Remarks" class="form-textarea mt-1.5 w-full rounded-lg border border-slate-700 bg-transparent p-2.5 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"></textarea>
-										</label>
-									</div>
-									<div class="flex justify-end space-x-2 mt-2">
-										<input type="reset" value="clear" class="btn space-x-2 bg-slate-150 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
-											<input type="submit" class="btn space-x-2 bg-primary font-medium text-black dark:text-white hover:text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 bg-accent dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
-											</input>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-	</main>
-	<script>
-				const ReceiptDate = document.querySelector("#receiptDate");
-				ReceiptDate._datepicker = flatpickr(flatpiReceiptDateckr1);
-				const EndDate = document.querySelector("#endDate");
-				ReceipEndDatetDate._datepicker = flatpickr(flatpiEndDateckr1);
-	</script>
-	<script>
-				var CSRF_TOKEN = '{{ csrf_token }}'
-				function districtSelector()
-				{
-					let district = $("#state").val();
-							 let gRecaptchaToken = "";
-							 grecaptcha.execute('{{site_key}}', {action: "/"}).then(function(token) {
-								 gRecaptchaToken = token;
-								 const formData = new FormData();
-								 formData.append("csrfmiddlewaretoken" , CSRF_TOKEN);
-								 formData.append("g-recaptcha-response" , gRecaptchaToken);
-								 formData.append('state', district);
-								 fetch("/api/districtFinder/", {
-									 method: 'POST',
-									 body: formData
-								 })
-								 .then(res =>res.json())
-								 .then(d => {
-									 districtArr = d["data"];
-									 $('#districts').empty().append('<option disabled selected></option>')
-									 for(i=0;i<districtArr.length;i++)
-									 {
-										 $('#districts').append(`<option >${districtArr[i]}</option>`);
-									 }
-									 
-								 })
-							 });
-				}
-				function talukaSelector()
-				{
-					let district = $("#district").val();
-							 let gRecaptchaToken = "";
-							 grecaptcha.execute('{{site_key}}', {action: "/"}).then(function(token) {
-								 gRecaptchaToken = token;
-								 const formData = new FormData();
-								 formData.append("csrfmiddlewaretoken" , CSRF_TOKEN);
-								 formData.append('district', district);
-								 formData.append("g-recaptcha-response" , gRecaptchaToken);
-								 fetch("/api/talukaFinder/", {
-									 method: 'POST',
-									 body: formData
-								 })
-								 .then(res =>res.json())
-								 .then(d => {
-									 talukaArr = d["data"];
-									 $('#talukas').empty().append('<option disabled selected></option>')
-									 for(i=0;i<talukaArr.length;i++)
-									 {
-										 $('#talukas').append(`<option >${talukaArr[i]}</option>`);
-									 }
-									 
-								 })
-							 })
-				}
-				function citySelector()
-				{
-					let district = $("#district").val();
-					let taluka = $("#taluka").val();
-							 let gRecaptchaToken = "";
-							 grecaptcha.execute('{{site_key}}', {action: "/"}).then(function(token) {
-								 gRecaptchaToken = token;    
-								 const formData = new FormData();
-								 formData.append("csrfmiddlewaretoken" , CSRF_TOKEN);
-								 formData.append('district', district);
-								 formData.append('taluka', taluka);
-								 formData.append("g-recaptcha-response" , gRecaptchaToken);
-								 fetch("/api/cityFinder/", {
-									 method: 'POST',
-									 body: formData
-								 })
-								 .then(res =>res.json())
-								 .then(d => {
-									 cityArr = d["data"];
-									 $('#citys').empty().append('<option disabled selected></option>')
-									 for(i=0;i<cityArr.length;i++)
-									 {
-										 $('#citys').append(`<option >${cityArr[i]}</option>`);
-									 }
-									 
-								 })
-							 })
-				}
-				function endDateCalulator()
-				{
-					receiptDate = $("#receiptDate").val();
-					if(receiptDate.split("-")[0].length == 4)
-					{
-						$("#receiptDate").val(receiptDate.split("-")[2]+"-"+receiptDate.split("-")[1]+"-"+receiptDate.split("-")[0])
-						receiptDate = receiptDate.split("-")[2]+"-"+receiptDate.split("-")[1]+"-"+receiptDate.split("-")[0]
-					}
-					subYear = $("#subYear").val();
-					if(subYear == null)
-					{
-						subYear = 0
-					}
-					if (receiptDate != "")
-					{
-						$("#endDate").val(receiptDate.split("-")[0]+"-"+receiptDate.split("-")[1]+"-"+(parseInt(receiptDate.split("-")[2])+parseInt(subYear)).toString())
-					}
-					
-				}
-				function dataFetcher(dataType)
-				{
-					dataValue = document.getElementById(dataType).value;
-					if (dataValue != "")
-					{
-						let gRecaptchaToken = "";
-						grecaptcha.execute('{{site_key}}', {action: "/"}).then(function(token) {
-							gRecaptchaToken = token;    
-							const formData = new FormData();
-							formData.append("csrfmiddlewaretoken" , CSRF_TOKEN);
-							formData.append('dataType', dataType);
-							formData.append('dataValue', dataValue);
-							formData.append("g-recaptcha-response" , gRecaptchaToken);
-							fetch("/api/entryFinder/", {
-								method: 'POST',
-								body: formData
-							})
-							.then(res =>res.json())
-							.then(d => {
-								if(d['data'] != "error")
-								{
-									document.getElementById("receiptDate").value = d['data'][0];
-									document.getElementById("subYear").value = d['data'][1];
-									document.getElementById("endDate").value = d['data'][2];
-									document.getElementById("name").value = d['data'][3];
-									document.getElementById("email").value = d['data'][4];
-									document.getElementById("phone").value = d['data'][5];
-									document.getElementById("address1").value = d['data'][6];
-									document.getElementById("address2").value = d['data'][7];
-									document.getElementById("address3").value = d['data'][8];
-									document.getElementById("state").value = d['data'][12];
-									document.getElementById("district").value = d['data'][11];
-									document.getElementById("taluka").value = d['data'][10];
-									document.getElementById("city").value = d['data'][9];
-									document.getElementById("pincode").value = d['data'][13];
-									document.getElementById("remark").value = d['data'][14];
-								}
-								else
-								{
-									document.getElementById("receiptDate").value = "";
-									document.getElementById("subYear").value = "";
-									document.getElementById("endDate").value = "";
-									document.getElementById("name").value = "";
-									document.getElementById("email").value = "";
-									document.getElementById("phone").value = "";
-									document.getElementById("address1").value = "";
-									document.getElementById("address2").value = "";
-									document.getElementById("address3").value = "";
-									document.getElementById("state").value = "";
-									document.getElementById("district").value = "";
-									document.getElementById("taluka").value = "";
-									document.getElementById("city").value = "";
-									document.getElementById("pincode").value = "";
-									document.getElementById("remark").value = "";
-									alert("We didnot find any entry in our database.");
-								}
-							})
-						})	
-					}
-					
-				}
-	</script>
-	<script src="https://www.google.com/recaptcha/api.js?render={{site_key}}"></script>
-	<script>
-				grecaptcha.ready(function() {
-					grecaptcha.execute('{{site_key}}', {action: "submit"}).then(function(token) {
-					document.getElementById('g-recaptcha-response').value = token;
+<main class="main-content w-full px-[var(--margin-x)] pb-8">
+    <div class="flex items-center space-x-4 py-5 lg:py-6">
+        <h2 class="text-xl font-medium text-slate-800 dark:text-navy-50 lg:text-2xl">
+            User Edit
+        </h2>
+        <div class="hidden h-full py-1 sm:flex">
+            <div class="h-full w-px bg-slate-300 dark:bg-navy-600"></div>
+        </div>
+        <ul class="hidden flex-wrap items-center space-x-2 sm:flex">
+            <li class="flex items-center space-x-2">
+                <a class="text-primary transition-colors hover:text-primary-focus dark:text-accent-light dark:hover:text-accent" href="#">User Menu</a>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 5l7 7-7 7"
+                    ></path>
+                </svg>
+            </li>
+            <li>User Edit</li>
+        </ul>
+    </div>
+    {% if error != "" %}
+    <div id="alert-dismissable-1" data-dismiss-class="scale-0 transition-all duration-300" class="w-[80%] sm:w-[50%] mx-auto mb-2 alert flex items-center justify-between overflow-hidden rounded-lg border border-error text-error">
+        <div class="flex">
+            <div class="bg-error p-3 text-white">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                </svg>
+            </div>
+            <div class="px-4 py-3 sm:px-5 w-fit">{{error}}</div>
+        </div>
+        <div class="px-2">
+            <button data-remove-alert class="btn h-7 w-7 rounded-full p-0 font-medium text-error hover:bg-error/20 focus:bg-error/20 active:bg-error/25">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"
+                    />
+                </svg>
+            </button>
+        </div>
+    </div>
+    <script>
+		// Dismissable alert 1
+		const alert1 = document.querySelector("#alert-dismissable-1");
+		
+		alert1
+			.querySelector("[data-remove-alert]")
+			.addEventListener("click", () => {
+				alert1.classList.add(...alert1.dataset.dismissClass.trim().split(" "));
+				setTimeout(() => alert1.remove(), 300);
+			});
+    </script>
+    {% elif msg != "" %}
+    <div id="alert-dismissable-2" data-dismiss-class="scale-0 transition-all duration-300" class="w-[80%] sm:w-[50%] mx-auto mb-2 alert flex items-center justify-between overflow-hidden rounded-lg border border-success text-success">
+        <div class="flex">
+            <div class="bg-success p-3 text-white">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                </svg>
+            </div>
+            <div class="px-4 py-3 sm:px-5 w-fit">{{msg}}</div>
+        </div>
+        <div class="px-2">
+            <button data-remove-alert class="btn h-7 w-7 rounded-full p-0 font-medium text-success hover:bg-success/20 focus:bg-success/20 active:bg-success/25">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"
+                    />
+                </svg>
+            </button>
+        </div>
+    </div>
+    <script>
+		// Dismissable alert 1
+		const alert2 = document.querySelector("#alert-dismissable-2");
+		
+		alert2
+			.querySelector("[data-remove-alert]")
+			.addEventListener("click", () => {
+				alert2.classList.add(...alert2.dataset.dismissClass.trim().split(" "));
+				setTimeout(() => alert2.remove(), 300);
+			});
+    </script>
+    {%endif%}
+    <div class="grid grid-cols-12 gap-4 sm:gap-5 lg:gap-6">
+        <div class="col-span-0 sm:col-span-2 "></div>
+        <div class="col-span-12 sm:col-span-8 ">
+            <div class="card p-4 sm:p-5">
+                <div class="mt-4 space-y-4">
+                    <form action="/useredit/" method="post">
+                        {% csrf_token %}
+                        <input
+                            type="text"
+                            id="g-recaptcha-response"
+                            name="g-recaptcha-response"
+                            hidden
+                        >
+                        <div class="grid grid-cols-1 gap-4 mb-4 sm:grid-cols-2">
+                            <div class="grid grid-cols-2 gap-4">
+                                <label class="block">
+                                    <span>Receipt No</span>
+                                    <span class="relative mt-1.5 flex">
+                                        <input
+                                            id="receiptNo"
+                                            name="receiptNo"
+                                            class="form-input peer w-full rounded-lg border border-slate-700 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                            placeholder="Enter Receipt No"
+                                            type="text"
+                                        >
+                                        <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="16"
+                                                height="16"
+                                                fill="currentColor"
+                                                class="bi bi-person"
+                                                viewBox="0 0 16 16"
+                                            >
+                                                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+                                            </svg>
+                                        </span>
+                                    </span>
+                                </label>
+                                <label class="block">
+                                    <span>&nbsp;</span>
+                                    <span class="relative mt-1.5 flex">
+                                        <button type="button" onclick="dataFetcher('receiptNo')" class="btn bg-blue-500 w-32 font-medium text-white text-right hover:bg-info-focus focus:bg-info-focus active:bg-info-focus/90">
+                                            Search
+                                        </button>
+                                        <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="16"
+                                                height="16"
+                                                fill="white"
+                                                class="bi bi-search"
+                                                viewBox="0 0 16 16"
+                                            >
+                                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                            </svg>
+                                        </span>
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <label class="block">
+                                    <span>Registration No</span>
+                                    <span class="relative mt-1.5 flex">
+                                        <input
+                                            id="registrationNo"
+                                            name="registrationNo"
+                                            class="form-input peer w-full rounded-lg border border-slate-700 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                            placeholder="Enter Registration No"
+                                            type="text"
+                                        >
+                                        <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="16"
+                                                height="16"
+                                                fill="currentColor"
+                                                class="bi bi-person"
+                                                viewBox="0 0 16 16"
+                                            >
+                                                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+                                            </svg>
+                                        </span>
+                                    </span>
+                                </label>
+                                <label class="block">
+                                    <span>&nbsp;</span>
+                                    <span class="relative mt-1.5 flex">
+                                        <button type="button" onclick="dataFetcher('registrationNo')" class="btn bg-blue-500 w-32 font-medium text-white text-right hover:bg-info-focus focus:bg-info-focus active:bg-info-focus/90">
+                                            Search
+                                        </button>
+                                        <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="16"
+                                                height="16"
+                                                fill="white"
+                                                class="bi bi-search"
+                                                viewBox="0 0 16 16"
+                                            >
+                                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                            </svg>
+                                        </span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 mb-4 sm:grid-cols-3">
+                            <label class="block">
+                                <span>Receipt Date</span>
+                                <span class="relative mt-1.5 flex">
+                                    <input
+                                        onchange="endDateCalulator()"
+                                        id="receiptDate"
+                                        name="receiptDate"
+                                        class="form-input peer w-full rounded-lg border  border-slate-700 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                        placeholder="Choose date..."
+                                        type="text"
+                                    >
+                                    <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="h-5 w-5 transition-colors duration-200"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                            stroke-width="1.5"
+                                        >
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                        </svg>
+                                    </span>
+                                </span>
+                            </label>
+                            <label class="block">
+                                <span>Subscription years</span>
+                                <span class="relative mt-1.5 flex">
+                                    <select
+                                        onchange="endDateCalulator()"
+                                        id="subYear"
+                                        name="subYear"
+                                        class="form-select  w-full rounded-lg border border-slate-700 bg-white px-3 py-2 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent"
+                                    >
+                                        <option value="0" selected disabled>0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </span>
+                            </label>
+                            <label class="block">
+                                <span>End Date</span>
+                                <span class="relative mt-1.5 flex">
+                                    <input
+                                        id="endDate"
+                                        name="endDate"
+                                        class="form-input peer w-full rounded-lg border border-slate-700 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                        placeholder="Choose date..."
+                                        type="text"
+                                    >
+                                    <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="h-5 w-5 transition-colors duration-200"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                            stroke-width="1.5"
+                                        >
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                        </svg>
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 mb-4 sm:grid-cols-3">
+                            <label class="block">
+                                <span>Name</span>
+                                <span class="relative mt-1.5 flex">
+                                    <input
+                                        id="name"
+                                        name="name"
+                                        class="form-input peer w-full rounded-lg border border-slate-700 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                        placeholder="Your Name"
+                                        type="text"
+                                    >
+                                    <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            class="bi bi-person"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+                                        </svg>
+                                    </span>
+                                </span>
+                            </label>
+                            <label class="block">
+                                <span>Email Address</span>
+                                <div class="relative mt-1.5 flex">
+                                    <input
+                                        id="email"
+                                        name="email"
+                                        class="form-input peer w-full rounded-lg border border-slate-700 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                        placeholder="Email address"
+                                        type="email"
+                                    >
+                                    <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            class="bi bi-envelope"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </label>
+                            <label class="block">
+                                <span>Mobile number</span>
+                                <span class="relative mt-1.5 flex">
+                                    <input
+                                        id="phone"
+                                        name="phone"
+                                        min="1000000000"
+                                        max="9999999999"
+                                        class="form-input peer w-full rounded-lg border border-slate-700 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                        placeholder="(999) 999-9999"
+                                        type="text"
+                                    >
+                                    <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            class="bi bi-telephone-fill"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                                        </svg>
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 mb-4 sm:grid-cols-3">
+                            <label class="block">
+                                <span>Address 1</span>
+                                <textarea
+                                    id="address1"
+                                    name="address1"
+                                    rows="1"
+                                    placeholder="Your Address 1"
+                                    class="form-textarea mt-1.5 w-full rounded-lg border border-slate-700 bg-transparent p-2.5 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                ></textarea>
+                            </label>
+                            <label class="block">
+                                <span>Address 2</span>
+                                <textarea
+                                    id="address2"
+                                    name="address2"
+                                    rows="1"
+                                    placeholder="Your Address 2"
+                                    class="form-textarea mt-1.5 w-full rounded-lg border border-slate-700 bg-transparent p-2.5 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                ></textarea>
+                            </label>
+                            <label class="block">
+                                <span>Address 3</span>
+                                <textarea
+                                    id="address3"
+                                    name="address3"
+                                    rows="1"
+                                    placeholder="Your Address 3"
+                                    class="form-textarea mt-1.5 w-full rounded-lg border border-slate-700 bg-transparent p-2.5 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                ></textarea>
+                            </label>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 mb-4 sm:grid-cols-3">
+                            <label class="block">
+                                <span>State</span>
+                                <span class="relative mt-1.5 flex">
+                                    <input
+                                        onchange="districtSelector()"
+                                        list="states"
+                                        id="state"
+                                        name="state"
+                                        class="form-input peer w-full rounded-lg border border-slate-700 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                        placeholder="Enter State"
+                                        type="text"
+                                    >
+                                    <datalist id="states" name="states" class="form-select mt-1.5 w-full rounded-lg bg-slate-150 px-3 py-2 ring-primary/50 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:hover:bg-navy-900 dark:focus:bg-navy-900">
+                                        {%for state in stateArr%}
+                                        <option>{{state}}</option>
+                                        {%endfor%}
+                                    </datalist>
+                                    <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            class="bi bi-flag-fill"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001"/>
+                                        </svg>
+                                    </span>
+                                </span>
+                            </label>
+                            <label class="block">
+                                <span>District</span>
+                                <span class="relative mt-1.5 flex">
+                                    <input
+                                        onchange="talukaSelector()"
+                                        list="districts"
+                                        id="district"
+                                        name="district"
+                                        class="form-input peer w-full rounded-lg border border-slate-700 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                        placeholder="Enter District"
+                                        type="text"
+                                    >
+                                    <datalist id="districts" name="districts" class="form-select mt-1.5 w-full rounded-lg bg-slate-150 px-3 py-2 ring-primary/50 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:hover:bg-navy-900 dark:focus:bg-navy-900"></datalist>
+                                    <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            class="bi bi-flag-fill"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001"/>
+                                        </svg>
+                                    </span>
+                                </span>
+                            </label>
+                            <label class="block">
+                                <span>Taluka</span>
+                                <span class="relative mt-1.5 flex">
+                                    <input
+                                        onchange="citySelector()"
+                                        list="talukas"
+                                        id="taluka"
+                                        name="taluka"
+                                        class="form-input peer w-full rounded-lg border border-slate-700 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                        placeholder="Enter Taluka"
+                                        type="text"
+                                    >
+                                    <datalist id="talukas" name="talukas" class="form-select mt-1.5 w-full rounded-lg bg-slate-150 px-3 py-2 ring-primary/50 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:hover:bg-navy-900 dark:focus:bg-navy-900"></datalist>
+                                    <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            class="bi bi-flag-fill"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001"/>
+                                        </svg>
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 mb-4 sm:grid-cols-3">
+                            <label class="block">
+                                <span>City</span>
+                                <span class="relative mt-1.5 flex">
+                                    <input
+                                        list="citys"
+                                        id="city"
+                                        name="city"
+                                        class="form-input peer w-full rounded-lg border border-slate-700 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                        placeholder="Enter City"
+                                        type="text"
+                                    >
+                                    <datalist id="citys" name="citys" class="form-select mt-1.5 w-full rounded-lg bg-slate-150 px-3 py-2 ring-primary/50 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:hover:bg-navy-900 dark:focus:bg-navy-900"></datalist>
+                                    <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            class="bi bi-building"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path d="M4 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1ZM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Z"/>
+                                            <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V1Zm11 0H3v14h3v-2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V15h3V1Z"/>
+                                        </svg>
+                                    </span>
+                                </span>
+                            </label>
+                            <label class="block">
+                                <span>Pincode</span>
+                                <div class="relative mt-1.5 flex">
+                                    <input
+                                        id="pincode"
+                                        name="pincode"
+                                        min="111111"
+                                        max="999999"
+                                        class="form-input peer w-full rounded-lg border border-slate-700 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                        placeholder="Pincode"
+                                        type="text"
+                                    >
+                                    <span class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            class="bi bi-geo-fill"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z"/>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </label>
+                            <div class="flex flex-nowrap gap-1">
+                                <label class="inline-flex items-center space-x-2 w-1/6">
+                                    <input
+                                        id="is_zone"
+                                        name="is_zone"
+                                        onchange="javascript:if(document.getElementById('is_zone').value == 'false'){document.getElementById('is_zone').value='true';document.getElementById('zoneContainer').classList.remove('hidden')}else{document.getElementById('is_zone').value='false';document.getElementById('zoneContainer').classList.add('hidden')}"
+                                        class="form-checkbox is-basic h-5 w-5 rounded bg-slate-100 border-slate-400/70 checked:!bg-info checked:!border-info hover:!border-info focus:!border-info dark:bg-navy-900 dark:border-navy-500"
+                                        type="checkbox"
+                                        value="false"
+                                    >
+                                    <p>Zone</p>
+                                </label>
+                                <label id="zoneContainer" class="block w-5/6 hidden">
+                                    <span class="relative mt-3 flex">
+                                        <input
+                                            list="zones"
+                                            id="zone"
+                                            name="zone"
+                                            class="form-input peer w-full rounded-lg border border-slate-700 bg-transparent px-3 py-2 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                            placeholder="Enter Zone"
+                                            type="text"
+                                        >
+                                        <datalist id="zones" name="zones" class="form-select mt-1.5 w-full rounded-lg bg-slate-150 px-3 py-2 ring-primary/50 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:hover:bg-navy-900 dark:focus:bg-navy-900"></datalist>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block pt-4">
+                                <span>Remarks</span>
+                                <textarea
+                                    id="remark"
+                                    name="remark"
+                                    rows="2"
+                                    placeholder="Enter Some Remarks"
+                                    class="form-textarea mt-1.5 w-full rounded-lg border border-slate-700 bg-transparent p-2.5 placeholder:text-slate-400 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                ></textarea>
+                            </label>
+                        </div>
+                        <div class="flex justify-end space-x-2 mt-2">
+                            <input type="reset" value="clear" class="btn space-x-2 bg-slate-150 font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
+                            <input type="submit" class="btn space-x-2 bg-primary font-medium text-black dark:text-white hover:text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 bg-accent dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90"></input>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+	const ReceiptDate = document.querySelector("#receiptDate");
+	ReceiptDate._datepicker = flatpickr(flatpiReceiptDateckr1);
+	const EndDate = document.querySelector("#endDate");
+	ReceipEndDatetDate._datepicker = flatpickr(flatpiEndDateckr1);
+</script>
+<script>
+	var CSRF_TOKEN = '{{ csrf_token }}'
+	function districtSelector()
+	{
+		let district = $("#state").val();
+					let gRecaptchaToken = "";
+					grecaptcha.execute('{{site_key}}', {action: "/"}).then(function(token) {
+						gRecaptchaToken = token;
+						const formData = new FormData();
+						formData.append("csrfmiddlewaretoken" , CSRF_TOKEN);
+						formData.append("g-recaptcha-response" , gRecaptchaToken);
+						formData.append('state', district);
+						fetch("/api/districtFinder/", {
+							method: 'POST',
+							body: formData
+						})
+						.then(res =>res.json())
+						.then(d => {
+							districtArr = d["data"];
+							$('#districts').empty().append('<option disabled selected></option>')
+							for(i=0;i<districtArr.length;i++)
+							{
+								$('#districts').append(`<option >${districtArr[i]}</option>`);
+							}
+							
+						})
 					});
-				});
-	</script>
+	}
+	function talukaSelector()
+	{
+		let district = $("#district").val();
+					let gRecaptchaToken = "";
+					grecaptcha.execute('{{site_key}}', {action: "/"}).then(function(token) {
+						gRecaptchaToken = token;
+						const formData = new FormData();
+						formData.append("csrfmiddlewaretoken" , CSRF_TOKEN);
+						formData.append('district', district);
+						formData.append("g-recaptcha-response" , gRecaptchaToken);
+						fetch("/api/talukaFinder/", {
+							method: 'POST',
+							body: formData
+						})
+						.then(res =>res.json())
+						.then(d => {
+							talukaArr = d["data"];
+							$('#talukas').empty().append('<option disabled selected></option>')
+							for(i=0;i<talukaArr.length;i++)
+							{
+								$('#talukas').append(`<option >${talukaArr[i]}</option>`);
+							}
+							
+						})
+					})
+	}
+	function citySelector()
+	{
+		let district = $("#district").val();
+		let taluka = $("#taluka").val();
+					let gRecaptchaToken = "";
+					grecaptcha.execute('{{site_key}}', {action: "/"}).then(function(token) {
+						gRecaptchaToken = token;    
+						const formData = new FormData();
+						formData.append("csrfmiddlewaretoken" , CSRF_TOKEN);
+						formData.append('district', district);
+						formData.append('taluka', taluka);
+						formData.append("g-recaptcha-response" , gRecaptchaToken);
+						fetch("/api/cityFinder/", {
+							method: 'POST',
+							body: formData
+						})
+						.then(res =>res.json())
+						.then(d => {
+							cityArr = d["data"];
+							$('#citys').empty().append('<option disabled selected></option>')
+							for(i=0;i<cityArr.length;i++)
+							{
+								$('#citys').append(`<option >${cityArr[i]}</option>`);
+							}
+							
+						})
+					})
+	}
+	function endDateCalulator()
+	{
+		receiptDate = $("#receiptDate").val();
+		if(receiptDate.split("-")[0].length == 4)
+		{
+			$("#receiptDate").val(receiptDate.split("-")[2]+"-"+receiptDate.split("-")[1]+"-"+receiptDate.split("-")[0])
+			receiptDate = receiptDate.split("-")[2]+"-"+receiptDate.split("-")[1]+"-"+receiptDate.split("-")[0]
+		}
+		subYear = $("#subYear").val();
+		if(subYear == null)
+		{
+			subYear = 0
+		}
+		if (receiptDate != "")
+		{
+			$("#endDate").val(receiptDate.split("-")[0]+"-"+receiptDate.split("-")[1]+"-"+(parseInt(receiptDate.split("-")[2])+parseInt(subYear)).toString())
+		}
+		
+	}
+	function dataFetcher(dataType)
+	{
+		dataValue = document.getElementById(dataType).value;
+		if (dataValue != "")
+		{
+			let gRecaptchaToken = "";
+			grecaptcha.execute('{{site_key}}', {action: "/"}).then(function(token) {
+				gRecaptchaToken = token;    
+				const formData = new FormData();
+				formData.append("csrfmiddlewaretoken" , CSRF_TOKEN);
+				formData.append('dataType', dataType);
+				formData.append('dataValue', dataValue);
+				formData.append("g-recaptcha-response" , gRecaptchaToken);
+				fetch("/api/entryFinder/", {
+					method: 'POST',
+					body: formData
+				})
+				.then(res =>res.json())
+				.then(d => {
+					if(d['data'] != "error")
+					{
+						document.getElementById("receiptDate").value = d['data'][0];
+						document.getElementById("subYear").value = d['data'][1];
+						document.getElementById("endDate").value = d['data'][2];
+						document.getElementById("name").value = d['data'][3];
+						document.getElementById("email").value = d['data'][4];
+						document.getElementById("phone").value = d['data'][5];
+						document.getElementById("address1").value = d['data'][6];
+						document.getElementById("address2").value = d['data'][7];
+						document.getElementById("address3").value = d['data'][8];
+						document.getElementById("state").value = d['data'][12];
+						document.getElementById("district").value = d['data'][11];
+						document.getElementById("taluka").value = d['data'][10];
+						document.getElementById("city").value = d['data'][9];
+						document.getElementById("pincode").value = d['data'][13];
+						document.getElementById("remark").value = d['data'][14];
+					}
+					else
+					{
+						document.getElementById("receiptDate").value = "";
+						document.getElementById("subYear").value = "";
+						document.getElementById("endDate").value = "";
+						document.getElementById("name").value = "";
+						document.getElementById("email").value = "";
+						document.getElementById("phone").value = "";
+						document.getElementById("address1").value = "";
+						document.getElementById("address2").value = "";
+						document.getElementById("address3").value = "";
+						document.getElementById("state").value = "";
+						document.getElementById("district").value = "";
+						document.getElementById("taluka").value = "";
+						document.getElementById("city").value = "";
+						document.getElementById("pincode").value = "";
+						document.getElementById("remark").value = "";
+						alert("We didnot find any entry in our database.");
+					}
+				})
+			})	
+		}
+		
+	}
+</script>
+<script src="https://www.google.com/recaptcha/api.js?render={{site_key}}"></script>
+<script>
+	grecaptcha.ready(function() {
+		grecaptcha.execute('{{site_key}}', {action: "submit"}).then(function(token) {
+		document.getElementById('g-recaptcha-response').value = token;
+		});
+	});
+</script>
 {% endblock %}

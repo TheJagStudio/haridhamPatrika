@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Calendar Form</title>
+        <link rel="shortcut icon" href="/static/images/SHA_logo.png" type="image/png">
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body>
+        <div style="background-image: url(/static/images/body-bg.jpg);background-size: cover;">
+            <div class="flex flex-1 flex-col w-full min-h-screen lg:w-fit mx-auto">
+                <main class="bg-white/80 lg:bg-white/60 backdrop-blur-lg lg:my-10 rounded-none lg:rounded-2xl overflow-hidden shadow-xl">
+                    <div class="mb-5">
+                        <a href="/calendar/" class="mx-auto px-4 py-10 sm:px-6 md:px-8 bg-[#ec7638] flex gap-8 shadow-xl">
+                            <img src="/static/images/SHA_logo.png" class="h-full w-10 scale-150">
+                            <h1 class="text-3xl font-bold text-white">Calendar Advertisement Form</h1>
+                        </a>
+                        <div class="mx-auto mt-8 px-4 sm:px-6 md:px-8">
+                            <div class="mt-6">
+                                <p class="text-2xl font-bold text-orange-600">Register</p>
+                            </div>
+                            <div class="flex flex-nowrap gap-2 items-center justify-start mt-1">
+                                <p class="text-sm font-medium text-gray-500">If account already created?</p>
+                                <a href="/calendar/login" class="bg-orange-500 rounded px-2 text-white">Login</a>
+                            </div>
+                            {% if error != None %}
+                            <p class="bg-red-200 rounded-lg p-1 px-2 mt-4 text-md text-red-800 font-bold border-2  border-red-500">{{ error }}</p>
+                            {% endif %}
+                            {% if success != None %}
+                            <p class="bg-green-200 rounded-lg p-1 px-2 mt-4 text-md text-green-800 font-bold border-2  border-green-500">{{ success }}</p>
+                            {% endif %}
+                            <form action="/calendar/register/" method="POST" class="mt-6 max-w-4xl">
+                                {% csrf_token %}
+                                <div class="space-y-8">
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
+                                        <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2"> First & Last Name</label>
+                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                            <div class="grid grid-cols-1 gap-x-4 gap-y-5 sm:grid-cols-2">
+                                                <div>
+                                                    <input
+                                                        type="text"
+                                                        name="fName"
+                                                        id="fName"
+                                                        placeholder="John"
+                                                        value=""
+                                                        required
+                                                        class="block w-full rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                                    >
+                                                </div>
+                                                <div>
+                                                    <input
+                                                        type="text"
+                                                        name="lName"
+                                                        id="lName"
+                                                        placeholder="Doe"
+                                                        value=""
+                                                        required
+                                                        class="block w-full rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
+                                        <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2"> Email Address</label>
+                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                            <input
+                                                type="email"
+                                                name="email"
+                                                id="email"
+                                                placeholder="johndoe@gmail.com"
+                                                value=""
+                                                required
+                                                class="block w-full rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
+                                        <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">
+                                            Mobile & Whatsapp
+                                            <br>
+                                            Number
+                                        </label>
+                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                            <div class="grid grid-cols-1 gap-x-4 gap-y-5 sm:grid-cols-2">
+                                                <div>
+                                                    <input
+                                                        type="text"
+                                                        name="phoneNumber"
+                                                        id="phoneNumber"
+                                                        placeholder="+91 8200XXXXXX"
+                                                        value=""
+                                                        required
+                                                        class="block w-full rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                                    >
+                                                </div>
+                                                <div>
+                                                    <input
+                                                        type="text"
+                                                        name="whatsappNumber"
+                                                        id="whatsappNumber"
+                                                        placeholder="+91 8200XXXXXX"
+                                                        value=""
+                                                        class="block w-full rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
+                                        <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">Pradesh</label>
+                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                            <select
+                                                id="pradesh"
+                                                name="pradesh"
+                                                required
+                                                class="block w-full rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                            >
+                                                <option selected disabled>-- select Pradesh --</option>
+                                                <option value="Akshar">Akshar</option>
+                                                <option value="Atmiya">Atmiya</option>
+                                                <option value="Australia">Australia</option>
+                                                <option value="Bhagatji">Bhagatji</option>
+                                                <option value="Bhoolku">Bhoolku</option>
+                                                <option value="Canada">Canada</option>
+                                                <option value="Dharmabhakti">Dharmabhakti</option>
+                                                <option value="Germany">Germany</option>
+                                                <option value="Ghanshyam">Ghanshyam</option>
+                                                <option value="Gopalanand">Gopalanand</option>
+                                                <option value="Gunatit">Gunatit</option>
+                                                <option value="Gyanyagna-Borsad">Gyanyagna-Borsad</option>
+                                                <option value="Gyanyagna-Vidyanagar">Gyanyagna-Vidyanagar</option>
+                                                <option value="Haridham">Haridham</option>
+                                                <option value="Harikrushna">Harikrushna</option>
+                                                <option value="Jagaswami">Jagaswami</option>
+                                                <option value="Kenya">Kenya</option>
+                                                <option value="Krushnaji">Krushnaji</option>
+                                                <option value="Narayan">Narayan</option>
+                                                <option value="New Zealand">New Zealand</option>
+                                                <option value="Nilkanth">Nilkanth</option>
+                                                <option value="Nirgun">Nirgun</option>
+                                                <option value="Paris">Paris</option>
+                                                <option value="Purushottam">Purushottam</option>
+                                                <option value="Sahajanand">Sahajanand</option>
+                                                <option value="Sanatan">Sanatan</option>
+                                                <option value="Santsaurabh">Santsaurabh</option>
+                                                <option value="Santsaurabh-1">Santsaurabh-1</option>
+                                                <option value="Sarvatit">Sarvatit</option>
+                                                <option value="Sevayagna">Sevayagna</option>
+                                                <option value="Shrihari">Shrihari</option>
+                                                <option value="Shrijimaharaj">Shrijimaharaj</option>
+                                                <option value="Singapore">Singapore</option>
+                                                <option value="South Africa">South Africa</option>
+                                                <option value="Suhrad">Suhrad</option>
+                                                <option value="Sunrut">Sunrut</option>
+                                                <option value="Switzerland">Switzerland</option>
+                                                <option value="UAE">UAE</option>
+                                                <option value="United Kingdom">United Kingdom</option>
+                                                <option value="USA">USA</option>
+                                                <option value="Yogiji">Yogiji</option>
+                                                <option value="Yogisaurabh">Yogisaurabh</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
+                                        <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">Password</label>
+                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                            <input
+                                                type="password"
+                                                name="password"
+                                                id="password"
+                                                placeholder="Enter Password"
+                                                value=""
+                                                required
+                                                class="block w-full rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
+                                        <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">Address</label>
+                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                            <textarea
+                                                name="address"
+                                                id="address"
+                                                placeholder="Enter Your Full Address"
+                                                value=""
+                                                rows="4"
+                                                required
+                                                class="block w-full resize-y rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                                spellcheck="false"
+                                            ></textarea>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
+                                        <div class="sm:mt-px sm:pt-2">
+                                            <label for="" class="block text-sm font-bold text-gray-900"> Username</label>
+                                            <p class="mt-1 text-sm font-medium text-gray-500">You can change it later</p>
+                                        </div>
+                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                            <div class="relative flex">
+                                                <div class="inline-flex items-center rounded-l-lg border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-900 sm:text-sm">rareblocks.co/user/</div>
+                                                <input
+                                                    type="text"
+                                                    name=""
+                                                    id=""
+                                                    placeholder=""
+                                                    value="martin.janiter"
+                                                    class="block w-full min-w-0 flex-1 rounded-none rounded-r-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                                >
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <!-- <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
+                                        <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2"> Website</label>
+                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                            <div class="relative flex">
+                                                <div class="inline-flex items-center rounded-l-lg border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-900 sm:text-sm">https://</div>
+                                                <input
+                                                    type="url"
+                                                    name=""
+                                                    id=""
+                                                    placeholder=""
+                                                    value="postcrafts.co"
+                                                    class="block w-full min-w-0 flex-1 rounded-none rounded-r-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                                >
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <!-- <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
+                                        <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2"> Job Title</label>
+                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                            <input
+                                                type="text"
+                                                name=""
+                                                id=""
+                                                placeholder=""
+                                                value="Software Developer"
+                                                class="block w-full rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                            >
+                                            <div class="relative mt-2 flex items-center">
+                                                <div class="flex h-5 items-center">
+                                                    <input
+                                                        type="checkbox"
+                                                        name="profile"
+                                                        id="profile"
+                                                        class="h-4 w-4 rounded border border-gray-300 text-orange-600 focus:ring-orange-600 accent-orange-500 text-white"
+                                                        checked
+                                                    >
+                                                </div>
+                                                <div class="ml-3">
+                                                    <label for="profile" class="text-sm font-medium text-gray-900"> Show this on my profile</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                                <div class="mt-6 sm:mt-12 flex flex-nowrap gap-4 items-end justify-end w-full">
+                                    <button type="button" class="inline-flex items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-sm font-semibold leading-5 text-white transition-all duration-200 hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:ring-offset-2">clear</button>
+                                    <button type="submit" class="inline-flex items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-sm font-semibold leading-5 text-white transition-all duration-200 hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:ring-offset-2">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </body>
+</html>
