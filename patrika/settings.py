@@ -73,6 +73,7 @@ TEMPLATES = [
             "adminPanel/templates",
             "api/templates",
             "calendarform/templates",
+            "templates",
         ],
         "APP_DIRS": True,
         "OPTIONS": {

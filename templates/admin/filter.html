@@ -1,0 +1,13 @@
+{% load i18n %}
+<details data-filter-title="{{ title }}" open class="pb-5">
+	<summary>
+		{% blocktranslate with filter_title=title %} By {{ filter_title }} {% endblocktranslate %}
+	</summary>
+	<select id="filter{{ filter_title }}" class="ml-5" onchange="(()=>{
+		window.location = document.getElementById('filter{{ filter_title }}').value
+	})()">
+	{% for choice in choices %}
+		<option value="{{ choice.query_string|iriencode }}" {% if choice.selected %} selected{% endif %}>{{ choice.display }}</option>
+	{% endfor %}
+	</select>
+</details>

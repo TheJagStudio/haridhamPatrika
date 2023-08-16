@@ -49,66 +49,63 @@
                             >
                                 {% csrf_token %}
                                 <div class="space-y-8">
-                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
-                                        <div>
-                                            <label for="singleCount" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">Number of Single & Mulitple Page Calendar</label>
-                                            <label for="profile" class="text-sm font-medium text-gray-500">Do not select if not needed</label>
-                                        </div>
-                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
-                                            <div class="grid grid-cols-1 gap-x-4 gap-y-5 sm:grid-cols-2">
-                                                <div>
-                                                    <input
-                                                        type="number"
-                                                        name="singleCount"
-                                                        id="singleCount"
-                                                        placeholder="Single Page Calendar"
-                                                        value=""
-                                                        step="50"
-                                                        min="100"
-                                                        class="block w-full rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
-                                                    >
-                                                </div>
-                                                <div>
-                                                    <input
-                                                        type="number"
-                                                        name="multiCount"
-                                                        id="multiCount"
-                                                        placeholder="Mulitple Page Calendar"
-                                                        value=""
-                                                        step="50"
-                                                        min="50"
-                                                        class="block w-full rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
-                                                    >
-                                                </div>
+                                    <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-5">
+                                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
+                                            <label for="singleCount" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">Number of Single Page Calendar</label>
+                                            <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                                <input
+                                                    type="number"
+                                                    name="singleCount"
+                                                    id="singleCount"
+                                                    placeholder="Single Page Calendar"
+                                                    value=""
+                                                    step="50"
+                                                    min="50"
+                                                    class="block w-full rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                                >
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
-                                        <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">Calendar Advertisement Description</label>
-                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
-                                            <textarea
-                                                name="adDescription"
-                                                id="adDescription"
-                                                placeholder="Enter full description for your Calendar Advertisement"
-                                                value=""
-                                                rows="4"
-                                                required
-                                                class="block w-full resize-y rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
-                                                spellcheck="false"
-                                            ></textarea>
+                                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
+                                            <label for="multiCount" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">Number of Mulitple Page Calendar</label>
+                                            <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                                <input
+                                                    type="number"
+                                                    name="multiCount"
+                                                    id="multiCount"
+                                                    placeholder="Mulitple Page Calendar"
+                                                    value=""
+                                                    step="50"
+                                                    min="50"
+                                                    class="block w-full rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                                >
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
-                                        <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">Company Logo</label>
-                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
-                                            <input
-                                                type="file"
-                                                name="logo"
-                                                id="logo"
-                                                value=""
-                                                required
-                                                accept="image/*"
-                                                onchange="(()=>{
+                                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
+                                            <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">Calendar Advertisement Description</label>
+                                            <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                                <textarea
+                                                    name="adDescription"
+                                                    id="adDescription"
+                                                    placeholder="Enter full description for your Calendar Advertisement"
+                                                    value=""
+                                                    rows="4"
+                                                    required
+                                                    class="block w-full resize-y rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                                    spellcheck="false"
+                                                ></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
+                                            <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">Company Logo</label>
+                                            <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                                <input
+                                                    type="file"
+                                                    name="logo"
+                                                    id="logo"
+                                                    value=""
+                                                    required
+                                                    accept="image/*"
+                                                    onchange="(()=>{
                                                     if(this.files[0].size > 26214400){
                                                         alert('File size can not be is larger than 25MB');
                                                         this.value = '';
@@ -118,26 +115,26 @@
                                                         document.getElementById('logoPreview').classList.add('h-32')
                                                     }
                                                 })()"
-                                                class="block w-full bg-white rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
-                                            >
-                                            <img
-                                                src=""
-                                                alt=""
-                                                class="mt-2 object-contain rounded-lg h-0 w-32 rounded-lg"
-                                                id="logoPreview"
-                                            >
+                                                    class="block w-full bg-white rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                                >
+                                                <img
+                                                    src=""
+                                                    alt=""
+                                                    class="mt-2 object-contain rounded-lg h-0 w-32 rounded-lg"
+                                                    id="logoPreview"
+                                                >
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
-                                        <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">Extra Files</label>
-                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
-                                            <input
-                                                type="file"
-                                                name="extraFiles"
-                                                id="extraFiles"
-                                                value=""
-                                                multiple
-                                                onchange="(()=>{
+                                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
+                                            <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">Extra Files</label>
+                                            <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                                <input
+                                                    type="file"
+                                                    name="extraFiles"
+                                                    id="extraFiles"
+                                                    value=""
+                                                    multiple
+                                                    onchange="(()=>{
                                                     let files = this.files
                                                     let preview = document.getElementById('extraFilesPreview')
                                                     preview.innerHTML = ''
@@ -183,35 +180,35 @@
                                                     //     preview.appendChild(newDiv)
                                                     // }
                                                 })()"
-                                                class="block w-full bg-white rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
-                                            >
-                                            <div id="extraFilesPreview" class="grid grid-cols-3 lg:grid-cols-6 gap-3"></div>
+                                                    class="block w-full bg-white rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                                >
+                                                <div id="extraFilesPreview" class="grid grid-cols-3 lg:grid-cols-6 gap-3"></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
-                                        <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">Extra Files Description</label>
-                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
-                                            <textarea
-                                                name="extraDescription"
-                                                id="extraDescription"
-                                                placeholder="Enter full description about extra files you added"
-                                                value=""
-                                                rows="4"
-                                                class="block w-full resize-y rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
-                                                spellcheck="false"
-                                            ></textarea>
+                                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
+                                            <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">Extra Files Description</label>
+                                            <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                                <textarea
+                                                    name="extraDescription"
+                                                    id="extraDescription"
+                                                    placeholder="Enter full description about extra files you added"
+                                                    value=""
+                                                    rows="4"
+                                                    class="block w-full resize-y rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                                    spellcheck="false"
+                                                ></textarea>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
-                                        <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">Old Calendar Design/Photo</label>
-                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
-                                            <input
-                                                type="file"
-                                                name="oldPhoto"
-                                                id="oldPhoto"
-                                                value=""
-                                                accept="image/*"
-                                                onchange="(()=>{
+                                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
+                                            <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">Old Calendar Design/Photo</label>
+                                            <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                                <input
+                                                    type="file"
+                                                    name="oldPhoto"
+                                                    id="oldPhoto"
+                                                    value=""
+                                                    accept="image/*"
+                                                    onchange="(()=>{
                                                     if(this.files[0].size > 26214400){
                                                         alert('File size can not be is larger than 25MB');
                                                         this.value = '';
@@ -219,49 +216,49 @@
                                                         document.getElementById('oldPhotoPreview').src = window.URL.createObjectURL(this.files[0])
                                                     }
                                                 })()"
-                                                class="block w-full bg-white rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
-                                            >
-                                            <img
-                                                src=""
-                                                alt=""
-                                                class="mt-2 object-contain rounded-lg"
-                                                id="oldPhotoPreview"
-                                            >
+                                                    class="block w-full bg-white rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                                >
+                                                <img
+                                                    src=""
+                                                    alt=""
+                                                    class="mt-2 object-contain rounded-lg"
+                                                    id="oldPhotoPreview"
+                                                >
+                                            </div>
+                                        </div>
+                                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
+                                            <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">GST Number</label>
+                                            <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                                <input
+                                                    type="text"
+                                                    name="gstNo"
+                                                    id="gstNo"
+                                                    placeholder="22AAAAA0000A1Z5"
+                                                    value=""
+                                                    maxlength="15"
+                                                    minlength="15"
+                                                    class="block w-full rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                                >
+                                            </div>
+                                        </div>
+                                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
+                                            <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">PAN Number</label>
+                                            <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                                <input
+                                                    type="text"
+                                                    name="panNo"
+                                                    id="panNo"
+                                                    placeholder="AAAAA1234A"
+                                                    value=""
+                                                    maxlength="10"
+                                                    minlength="10"
+                                                    class="block w-full rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
+                                                >
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
-                                        <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">GST Number</label>
-                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
-                                            <input
-                                                type="text"
-                                                name="gstNo"
-                                                id="gstNo"
-                                                placeholder="22AAAAA0000A1Z5"
-                                                value=""
-                                                maxlength="15"
-                                                minlength="15"
-                                                class="block w-full rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
-                                            >
-                                        </div>
-                                    </div>
-                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-5">
-                                        <label for="" class="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2">PAN Number</label>
-                                        <div class="mt-2 sm:col-span-2 sm:mt-0">
-                                            <input
-                                                type="text"
-                                                name="panNo"
-                                                id="panNo"
-                                                placeholder="AAAAA1234A"
-                                                value=""
-                                                maxlength="10"
-                                                minlength="10"
-                                                class="block w-full rounded-lg border border-gray-300 px-4 py-3 placeholder-gray-500 caret-orange-600 focus:outline-none focus:border-orange-600 focus:ring-orange-600 sm:text-sm"
-                                            >
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-6 sm:mt-12 flex flex-nowrap gap-4 items-end justify-end w-full">
-                                    <button type="button" onclick="((event)=>{
+                                    <div class="mt-6 sm:mt-12 flex flex-nowrap gap-4 items-end justify-end w-full">
+                                        <button type="button" onclick="((event)=>{
                                         let singleCount  = document.getElementById('singleCount').value
                                         let multiCount  = document.getElementById('multiCount').value
                                         if ((singleCount == 0 && multiCount == 0) || (singleCount == '' && multiCount == '') || (singleCount == 0 && multiCount == '') || (singleCount == '' && multiCount == 0)){
@@ -270,12 +267,12 @@
                                             document.getElementById('calendarForm').submit()
                                         }
                                     })()" class="inline-flex items-center justify-center rounded-md border border-transparent bg-orange-600 px-6 py-3 text-sm font-semibold leading-5 text-white transition-all duration-200 hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:ring-offset-2">Next</button>
-                                </div>
-                            </form>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                </main>
+                    </main>
+                </div>
             </div>
-        </div>
-    </body>
-</html>
+        </body>
+    </html>

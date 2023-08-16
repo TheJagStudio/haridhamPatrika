@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .models import CalendarEntry, CalendarUser
@@ -22,7 +23,7 @@ def register(request):
         pradesh = request.POST.get("pradesh")
         address = request.POST.get("address")
         password = request.POST.get("password")
-
+        isKaryakata = request.POST.get("isKaryakata")
         getUser = User.objects.filter(username=phoneNumber)
         if getUser:
             context = {"error": "User already exists"}
@@ -35,6 +36,8 @@ def register(request):
                 newUser.email = email
                 newUser.username = phoneNumber
                 newUser.set_password(password)
+                my_group = Group.objects.get(name="calendar")
+                my_group.user_set.add(newUser)
                 newUser.save()
 
                 newCalendarUser = CalendarUser()
@@ -43,6 +46,10 @@ def register(request):
                 newCalendarUser.pradesh = pradesh
                 newCalendarUser.mobile = phoneNumber
                 newCalendarUser.whatsapp = whatsappNumber
+                if isKaryakata == "on":
+                    newCalendarUser.isKaryakata = True
+                else:
+                    newCalendarUser.isKaryakata = False
                 newCalendarUser.save()
                 context = {"success": "User created successfully"}
                 return render(request, "calendarRegister.html", context=context)

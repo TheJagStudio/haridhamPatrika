@@ -44,7 +44,7 @@ class CalendarUser(models.Model):
     pradesh = models.CharField(max_length=100, blank=True, null=True)
     mobile = models.CharField(max_length=20, blank=True, null=True)
     whatsapp = models.CharField(max_length=20, blank=True, null=True)
-    
+    isKaryakata = models.BooleanField(default=False, blank=True, null=True)
 
     def __str__(self):
         return self.user.first_name + " " + self.user.last_name
